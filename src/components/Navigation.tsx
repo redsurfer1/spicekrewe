@@ -13,17 +13,6 @@ export default function Navigation() {
               src="/assets/images/brand/SpiceKrewe_Logo_Transparent_background.png"
               alt="Spice Krewe"
               className="h-16 w-auto"
-              onError={(e) => {
-                const target = e.target as HTMLImageElement;
-                target.style.display = 'none';
-                const parent = target.parentElement;
-                if (parent) {
-                  const textSpan = document.createElement('span');
-                  textSpan.className = 'text-2xl font-bold bg-gradient-to-r from-spice-purple to-spice-blue bg-clip-text text-transparent';
-                  textSpan.textContent = 'Spice Krewe';
-                  parent.appendChild(textSpan);
-                }
-              }}
             />
           </div>
 

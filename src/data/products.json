@@ -1,0 +1,65 @@
+[
+  {
+    "id": "1",
+    "name": "Cajun Creole Blend",
+    "description": "Our signature blend of paprika, garlic, onion, and cayenne. Perfect for gumbo, jambalaya, and blackened dishes.",
+    "price": 12.99,
+    "category": "Blends"
+  },
+  {
+    "id": "2",
+    "name": "Bayou Blackening Spice",
+    "description": "Robust mix for blackened fish and chicken. Paprika, thyme, oregano, and a kick of cayenne.",
+    "price": 11.99,
+    "category": "Blends"
+  },
+  {
+    "id": "3",
+    "name": "Holy Trinity Seasoning",
+    "description": "Celery, bell pepper, and onion in spice form. The soul of Creole cooking.",
+    "price": 9.99,
+    "category": "Blends"
+  },
+  {
+    "id": "4",
+    "name": "Smoked Paprika",
+    "description": "Spanish-style smoked paprika. Sweet and smoky, ideal for rubs and finishing.",
+    "price": 8.99,
+    "category": "Single Spices"
+  },
+  {
+    "id": "5",
+    "name": "Cayenne Pepper",
+    "description": "Ground cayenne for heat and color. From mild to extra hot options.",
+    "price": 7.99,
+    "category": "Single Spices"
+  },
+  {
+    "id": "6",
+    "name": "File Powder",
+    "description": "Ground sassafras for authentic gumbo. Use as a thickener and flavor enhancer.",
+    "price": 10.99,
+    "category": "Single Spices"
+  },
+  {
+    "id": "7",
+    "name": "Mardi Gras Mix",
+    "description": "Festive blend of herbs and spices for party dishes and king cake season.",
+    "price": 13.99,
+    "category": "Blends"
+  },
+  {
+    "id": "8",
+    "name": "Voodoo Heat",
+    "description": "Our hottest blend. Ghost pepper, habanero, and cayenne for the brave.",
+    "price": 14.99,
+    "category": "Blends"
+  },
+  {
+    "id": "9",
+    "name": "Creole Mustard Seed",
+    "description": "Whole brown mustard seeds for pickles, dressings, and Creole mustard.",
+    "price": 6.99,
+    "category": "Single Spices"
+  }
+]

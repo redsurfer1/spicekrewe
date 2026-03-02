@@ -81,7 +81,7 @@ export default function Contact() {
                   </div>
                   <div>
                     <h4 className="font-semibold text-gray-900 mb-1">Phone</h4>
-                    <p className="text-gray-600">(555) 123-4567</p>
+                    <p className="text-gray-600">901-295-9491</p>
                   </div>
                 </div>
 
@@ -91,7 +91,7 @@ export default function Contact() {
                   </div>
                   <div>
                     <h4 className="font-semibold text-gray-900 mb-1">Location</h4>
-                    <p className="text-gray-600">123 Community Street<br />New Orleans, LA 70112</p>
+                    <p className="text-gray-600">123 Community Street<br />Memphis, TN 38107</p>
                   </div>
                 </div>
               </div>

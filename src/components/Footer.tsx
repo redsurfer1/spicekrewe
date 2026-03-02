@@ -90,9 +90,9 @@ export default function Footer() {
             <h3 className="font-bold text-lg mb-4">Contact</h3>
             <ul className="space-y-2 text-gray-400">
               <li>123 Community Street</li>
-              <li>New Orleans, LA 70112</li>
+              <li>Memphis, TN 38107</li>
               <li className="mt-4">hello@spicekrewe.com</li>
-              <li>(555) 123-4567</li>
+              <li>901-295-9491</li>
             </ul>
           </div>
         </div>
