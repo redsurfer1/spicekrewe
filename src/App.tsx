@@ -6,7 +6,7 @@ import { AppProvider } from './contexts/AppContext';
 function App() {
   return (
     <AppProvider>
-      <BrowserRouter basename="/spicekrewe">
+      <BrowserRouter>
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/admin" element={<AdminDashboard />} />
