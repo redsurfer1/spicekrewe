@@ -1,10 +1,96 @@
 import type Stripe from 'stripe';
 import type { Result } from './result';
 import { getBriefRecord, isBriefMarkedPaid, patchBriefRecord } from './airtable-brief';
+import {
+  buildFallbackTrd,
+  formatTrdForAirtable,
+  generateTechnicalRequirementsDocument,
+} from './ai/autoScoper';
+import { runPredictiveMatchmakerAfterFeaturedPayment } from './matchmakerAlerts';
 
 function alreadyProcessedEvent(fields: Record<string, unknown>, stripeEventId: string): boolean {
   const prev = fields.StripeLastWebhookEventId ?? fields.stripeLastWebhookEventId;
   return typeof prev === 'string' && prev === stripeEventId;
+}
+
+/** Featured matching checkout — triggers Auto-Scoper after payment. Legacy sessions without metadata are treated as featured. */
+function isFeaturedMatchingCheckout(session: Stripe.Checkout.Session): boolean {
+  const v = session.metadata?.spiceKreweCheckout;
+  if (v === undefined || v === '') return true;
+  return v === 'featured_matching';
+}
+
+/**
+ * After successful Featured payment: generate TRD via Gemini and write to Airtable `TechnicalRequirements`.
+ * Failures are logged; payment state is not rolled back.
+ */
+async function syncTechnicalRequirementsFromBrief(
+  briefId: string,
+  fields: Record<string, unknown>,
+): Promise<void> {
+  const existing = fields.TechnicalRequirements ?? fields.technicalRequirements;
+  if (typeof existing === 'string' && existing.trim().length > 0) {
+    return;
+  }
+
+  const raw = fields.Description ?? fields.description;
+  const description = typeof raw === 'string' ? raw : '';
+  if (!description.trim()) {
+    return;
+  }
+
+  const trdResult = await generateTechnicalRequirementsDocument(description);
+  const trd = trdResult.success ? trdResult.data : buildFallbackTrd(description);
+  if (!trdResult.success) {
+    // eslint-disable-next-line no-console
+    console.error(
+      JSON.stringify({
+        audit: true,
+        level: 'warn',
+        event: 'auto_scoper.gemini_failed',
+        briefId,
+        message: trdResult.error.message,
+      }),
+    );
+  }
+
+  const payload = formatTrdForAirtable(trd);
+  const patched = await patchBriefRecord(briefId, {
+    TechnicalRequirements: payload,
+  });
+
+  if (!patched.success) {
+    // eslint-disable-next-line no-console
+    console.error(
+      JSON.stringify({
+        audit: true,
+        level: 'error',
+        event: 'auto_scoper.airtable_patch_failed',
+        briefId,
+        message: patched.error.message,
+      }),
+    );
+  } else {
+    // eslint-disable-next-line no-console
+    console.log(
+      JSON.stringify({
+        audit: true,
+        level: 'info',
+        event: 'auto_scoper.trd_synced',
+        briefId,
+        estimatedRdHours: trd.estimatedRdHours,
+      }),
+    );
+  }
+}
+
+async function runFeaturedMatchmakerPipeline(briefId: string): Promise<void> {
+  const latest = await getBriefRecord(briefId);
+  if (!latest.success) return;
+  await runPredictiveMatchmakerAfterFeaturedPayment(
+    briefId,
+    latest.data.fields as Record<string, unknown>,
+  );
 }
 
 /**
@@ -46,6 +132,10 @@ export async function handleCheckoutSessionCompleted(
   });
 
   if (withEventId.success) {
+    if (isFeaturedMatchingCheckout(session)) {
+      await syncTechnicalRequirementsFromBrief(briefId, fields);
+      await runFeaturedMatchmakerPipeline(briefId);
+    }
     return { success: true, data: { skipped: false, briefId } };
   }
 
@@ -56,6 +146,13 @@ export async function handleCheckoutSessionCompleted(
 
   if (!fallback.success) {
     return fallback;
+  }
+
+  if (isFeaturedMatchingCheckout(session)) {
+    const refreshed = await getBriefRecord(briefId);
+    const nextFields = refreshed.success ? (refreshed.data.fields as Record<string, unknown>) : fields;
+    await syncTechnicalRequirementsFromBrief(briefId, nextFields);
+    await runFeaturedMatchmakerPipeline(briefId);
   }
 
   return { success: true, data: { skipped: false, briefId } };

@@ -1,3 +1,8 @@
+/**
+ * Brief intake: creates the Airtable Briefs row.
+ * Post-payment: successful Stripe Featured checkout (`spiceKreweCheckout: featured_matching`) triggers
+ * Auto-Scoper in `server/lib/webhook-checkout-completed.ts`, which writes `TechnicalRequirements` (TRD JSON).
+ */
 import type { VercelRequest, VercelResponse } from '@vercel/node';
 import { createBriefRecord } from '../server/lib/airtable-brief';
 import { createRequestId } from '../server/lib/request-id';

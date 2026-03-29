@@ -164,6 +164,8 @@ export type BriefAuditRow = {
   createdTime: string | null;
   projectTitleObfuscated: string;
   clientNameObfuscated: string;
+  /** When `PredictiveMatchSummary` exists on the Briefs record (matchmaker pipeline). */
+  predictiveMatchSummary?: string;
 };
 
 function obfuscateLabel(s: string): string {
@@ -209,11 +211,14 @@ export async function listRecentBriefsForAudit(pageSize: number): Promise<Result
       const f = rec.fields as Record<string, unknown>;
       const pt = f.ProjectTitle ?? f.projectTitle;
       const cn = f.ClientName ?? f.clientName;
+      const pm = f.PredictiveMatchSummary ?? f.predictiveMatchSummary;
       return {
         recordId: rec.id,
         createdTime: rec.createdTime ?? null,
         projectTitleObfuscated: obfuscateLabel(typeof pt === 'string' ? pt : 'Brief'),
         clientNameObfuscated: obfuscateLabel(typeof cn === 'string' ? cn : 'Client'),
+        predictiveMatchSummary:
+          typeof pm === 'string' && pm.trim() ? pm.trim().slice(0, 2000) : undefined,
       };
     });
 

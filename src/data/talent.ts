@@ -4,7 +4,8 @@ import { fetchProfessionals } from '../lib/airtable';
 
 export type { TalentRecord } from '../types/talentRecord';
 
-/** Offline / fallback seed — used when Airtable is unavailable or returns an error. */
+/** Offline / fallback seed — used when Airtable is unavailable or returns an error.
+ * Server predictive matchmaking mirrors this roster in `server/data/talentRoster.ts` — keep both in sync. */
 export const TALENT_FALLBACK: TalentRecord[] = [
   {
     id: 'marcus-johnson',

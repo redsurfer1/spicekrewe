@@ -1,11 +1,20 @@
 import { useCallback, useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { Activity, Database, Radio, ShieldCheck } from 'lucide-react';
+import { Activity, Database, Radio, ShieldCheck, Users } from 'lucide-react';
 import Navbar from '../../components/Navigation';
 import Footer from '../../components/Footer';
 import SEO from '../../components/SEO';
 
 const TOKEN_KEY = 'sk_admin_token';
+
+type MatchmakerLogRow = {
+  id: string;
+  at: string;
+  briefId: string;
+  projectName: string;
+  message: string;
+  topMatches: Array<{ id: string; name: string; score: number }>;
+};
 
 type HealthPayload = {
   generatedAt: string;
@@ -16,8 +25,10 @@ type HealthPayload = {
     createdTime: string | null;
     projectTitle: string;
     clientName: string;
+    predictiveMatchSummary?: string;
   }>;
   recentBriefsError?: string;
+  matchmakerLogs?: MatchmakerLogRow[];
 };
 
 function apiPath(p: string): string {
@@ -117,6 +128,39 @@ export default function AdminHealthPage() {
 
             <div className="rounded-sk-md border border-sk-card-border bg-white p-5 shadow-sm">
               <div className="flex items-center gap-2 mb-3">
+                <Users className="h-5 w-5 text-spice-blue" aria-hidden />
+                <h2 className="font-semibold text-gray-900">Predictive matchmaker log</h2>
+              </div>
+              <p className="text-xs text-gray-500 mb-3">
+                Shown after a Featured brief is paid (TRD skills vs roster). SMS/email hooks are stubbed for SendGrid/Twilio.
+              </p>
+              {!data.matchmakerLogs || data.matchmakerLogs.length === 0 ? (
+                <p className="text-sm text-gray-600">
+                  No in-process entries yet (cold starts clear memory). After payment, lines also sync to Airtable{' '}
+                  <code className="text-xs bg-gray-100 px-1 rounded">PredictiveMatchSummary</code> when that field exists.
+                </p>
+              ) : (
+                <ul className="divide-y divide-gray-100 space-y-0">
+                  {data.matchmakerLogs.map((row) => (
+                    <li key={row.id} className="py-3 text-sm">
+                      <p className="font-medium text-gray-900">{row.message}</p>
+                      <p className="text-xs text-gray-500 mt-1">
+                        {new Date(row.at).toISOString()} · brief {row.briefId.slice(0, 12)}…
+                        {row.topMatches?.length ? (
+                          <span className="ml-2">
+                            Scores:{' '}
+                            {row.topMatches.map((m) => `${m.name} (${m.score})`).join(' · ')}
+                          </span>
+                        ) : null}
+                      </p>
+                    </li>
+                  ))}
+                </ul>
+              )}
+            </div>
+
+            <div className="rounded-sk-md border border-sk-card-border bg-white p-5 shadow-sm">
+              <div className="flex items-center gap-2 mb-3">
                 <Activity className="h-5 w-5 text-spice-purple" aria-hidden />
                 <h2 className="font-semibold text-gray-900">Recent brief syncs (PII obfuscated)</h2>
               </div>
@@ -127,13 +171,18 @@ export default function AdminHealthPage() {
               ) : (
                 <ul className="divide-y divide-gray-100">
                   {data.recentBriefSyncs.map((row) => (
-                    <li key={row.recordIdSuffix} className="py-3 text-sm flex flex-wrap gap-x-4 gap-y-1">
-                      <span className="text-gray-500">…{row.recordIdSuffix}</span>
-                      <span className="text-gray-800">{row.projectTitle}</span>
-                      <span className="text-gray-600">{row.clientName}</span>
-                      <span className="text-gray-400 text-xs">
-                        {row.createdTime ? new Date(row.createdTime).toISOString() : '—'}
-                      </span>
+                    <li key={row.recordIdSuffix} className="py-3 text-sm flex flex-col gap-1">
+                      <div className="flex flex-wrap gap-x-4 gap-y-1">
+                        <span className="text-gray-500">…{row.recordIdSuffix}</span>
+                        <span className="text-gray-800">{row.projectTitle}</span>
+                        <span className="text-gray-600">{row.clientName}</span>
+                        <span className="text-gray-400 text-xs">
+                          {row.createdTime ? new Date(row.createdTime).toISOString() : '—'}
+                        </span>
+                      </div>
+                      {row.predictiveMatchSummary ? (
+                        <p className="text-xs text-spice-purple font-medium pl-0">{row.predictiveMatchSummary}</p>
+                      ) : null}
                     </li>
                   ))}
                 </ul>

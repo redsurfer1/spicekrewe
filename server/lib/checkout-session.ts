@@ -40,6 +40,8 @@ export async function createStripeCheckoutSession(body: CheckoutBody): Promise<R
   const sessionMetadata: Record<string, string> = {
     ...metadata,
     briefId: briefId.trim(),
+    /** Used by webhooks to confirm Featured matching checkout → Auto-Scoper TRD sync. */
+    spiceKreweCheckout: 'featured_matching',
   };
 
   try {

@@ -2,6 +2,7 @@ import type { VercelRequest, VercelResponse } from '@vercel/node';
 import { readBearerToken, verifyAdminToken } from '../../server/lib/admin-token';
 import { listRecentBriefsForAudit, pingAirtableBriefsTable } from '../../server/lib/airtable-brief';
 import type { BriefAuditRow } from '../../server/lib/airtable-brief';
+import { getRecentMatchmakerLogs } from '../../server/lib/matchmakerAlerts';
 
 function cors(res: VercelResponse, origin: string | undefined): void {
   const allow = process.env.SERVER_ALLOWED_ORIGIN?.trim() || origin || '*';
@@ -53,8 +54,10 @@ export default async function handler(req: VercelRequest, res: VercelResponse): 
           createdTime: r.createdTime,
           projectTitle: r.projectTitleObfuscated,
           clientName: r.clientNameObfuscated,
+          predictiveMatchSummary: r.predictiveMatchSummary,
         }))
       : [],
     recentBriefsError: recent.success ? undefined : recent.error.message,
+    matchmakerLogs: getRecentMatchmakerLogs(25),
   });
 }

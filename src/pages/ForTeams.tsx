@@ -1,6 +1,7 @@
 import Navbar from '../components/Navigation';
 import Footer from '../components/Footer';
 import SEO from '../components/SEO';
+import DaaSPreview from '../components/DaaSPreview';
 
 const ENTERPRISE_EMAIL = 'enterprise@spicekrewe.com';
 const MAILTO_HREF = `mailto:${encodeURIComponent(ENTERPRISE_EMAIL)}?subject=${encodeURIComponent('Spice Krewe — Enterprise sales')}`;
@@ -197,6 +198,8 @@ export default function ForTeams() {
           </div>
         </div>
       </section>
+
+      <DaaSPreview />
 
       {/* Process */}
       <section style={{ padding: '64px 24px', background: 'var(--sk-body-bg)' }}>
