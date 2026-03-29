@@ -31,15 +31,17 @@ export default function Navbar() {
           className="z-[2] shrink-0 no-underline flex items-center min-h-[44px]"
           aria-label="Spice Krewe home"
         >
-          <img
-            src="/assets/brand/logo-primary.png"
-            alt="Spice Krewe Logo"
-            width={200}
-            height={40}
-            className="h-8 w-auto max-h-8 sm:h-10 sm:max-h-10 object-contain object-left"
-            loading="eager"
-            decoding="async"
-          />
+          <span className="inline-flex shrink-0 items-center justify-center rounded-full bg-white p-1.5 shadow-sm">
+            <img
+              src="/assets/brand/logo-primary.png"
+              alt="Spice Krewe Logo"
+              width={200}
+              height={32}
+              className="h-8 w-auto max-h-8 object-contain object-center"
+              loading="eager"
+              decoding="async"
+            />
+          </span>
         </Link>
 
         {/* Desktop center links */}

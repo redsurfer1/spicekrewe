@@ -24,19 +24,21 @@ export default function Footer() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid md:grid-cols-4 gap-10 mb-10">
           <div className="md:col-span-2">
-            <div className="mb-4">
-              <img
-                src="/assets/brand/logo-white.svg"
-                alt="Spice Krewe Logo"
-                width={200}
-                height={32}
-                className="h-8 w-auto max-w-[200px] object-contain object-left"
-                loading="eager"
-                decoding="async"
-              />
+            <div className="mb-4 flex flex-col items-start gap-0">
+              <span className="inline-flex shrink-0 items-center justify-center rounded-lg bg-white p-2 shadow-sm">
+                <img
+                  src="/assets/brand/logo-primary.png"
+                  alt="Spice Krewe Logo"
+                  width={220}
+                  height={48}
+                  className="h-12 w-auto max-h-12 max-w-[min(100%,280px)] object-contain object-left"
+                  loading="eager"
+                  decoding="async"
+                />
+              </span>
             </div>
             <p className="mb-6 max-w-md" style={{ color: 'rgba(255,255,255,0.7)', lineHeight: 1.65, fontSize: 15 }}>
-              Community · Culture · Culinary talent
+              Hire Vetted Culinary Professionals
             </p>
             <div className="flex gap-3">
               <a

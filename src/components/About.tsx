@@ -62,7 +62,7 @@ export default function About() {
           </div>
         ) : (
           <>
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center mb-20">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center mb-16 sm:mb-20">
               <div className="space-y-6">
                 <h3 className="text-3xl font-bold text-gray-900">Our Story</h3>
                 <p className="text-lg text-gray-700 leading-relaxed">
@@ -103,39 +103,6 @@ export default function About() {
                   />
                 </div>
               </div>
-            </div>
-
-            <div className="mb-16 grid grid-cols-1 sm:grid-cols-3 gap-4 max-w-6xl mx-auto">
-              <figure className="m-0 overflow-hidden rounded-sk-md border border-sk-card-border shadow-md bg-white">
-                <img
-                  src="/assets/images/heritage/crawfish-season.jpg"
-                  alt="Crawfish season gathering"
-                  className="w-full h-44 object-cover"
-                  loading="lazy"
-                  decoding="async"
-                />
-                <figcaption className="px-3 py-2 text-xs text-gray-600 text-center">Heritage: crawfish season</figcaption>
-              </figure>
-              <figure className="m-0 overflow-hidden rounded-sk-md border border-sk-card-border shadow-md bg-white">
-                <img
-                  src="/assets/images/heritage/crawfish-boil.jpg"
-                  alt="Crawfish boil community moment"
-                  className="w-full h-44 object-cover"
-                  loading="lazy"
-                  decoding="async"
-                />
-                <figcaption className="px-3 py-2 text-xs text-gray-600 text-center">Community boil</figcaption>
-              </figure>
-              <figure className="m-0 overflow-hidden rounded-sk-md border border-sk-card-border shadow-md bg-white">
-                <img
-                  src="/assets/images/heritage/community-moment.jpg"
-                  alt="Spice Krewe community moment"
-                  className="w-full h-44 object-cover"
-                  loading="lazy"
-                  decoding="async"
-                />
-                <figcaption className="px-3 py-2 text-xs text-gray-600 text-center">Krewe in the field</figcaption>
-              </figure>
             </div>
 
             <div className="mb-20 bg-white p-10 border border-sk-card-border rounded-sk-md shadow-lg">
