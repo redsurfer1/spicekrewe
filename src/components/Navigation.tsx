@@ -1,7 +1,14 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { Menu, X } from 'lucide-react';
+import { ChevronDown, Menu, X } from 'lucide-react';
 import SpiceKreweWordmark from './SpiceKreweWordmark';
+
+const hireConversionLinks = [
+  { to: '/guides/pricing-2025', label: '2025 service rates' },
+  { to: '/hire/recipe-developer', label: 'Hire recipe developer' },
+  { to: '/hire/food-stylist', label: 'Hire food stylist' },
+  { to: '/hire/culinary-consultant', label: 'Hire culinary consultant' },
+] as const;
 
 const navLinks: { to: string; label: string; title?: string }[] = [
   { to: '/talent', label: 'Find talent' },
@@ -18,11 +25,25 @@ const linkClass =
  */
 export default function Navbar() {
   const [mobileOpen, setMobileOpen] = useState(false);
+  const [hireMenuOpen, setHireMenuOpen] = useState(false);
+  const hireMenuRef = useRef<HTMLDivElement>(null);
   const location = useLocation();
 
   useEffect(() => {
     setMobileOpen(false);
+    setHireMenuOpen(false);
   }, [location.pathname, location.search]);
+
+  useEffect(() => {
+    if (!hireMenuOpen) return;
+    const onDocClick = (e: MouseEvent) => {
+      if (hireMenuRef.current && !hireMenuRef.current.contains(e.target as Node)) {
+        setHireMenuOpen(false);
+      }
+    };
+    document.addEventListener('click', onDocClick);
+    return () => document.removeEventListener('click', onDocClick);
+  }, [hireMenuOpen]);
 
   return (
     <header className="sticky top-0 z-[100] border-b border-sk-purple-light/20 bg-sk-navy backdrop-blur-md">
@@ -43,6 +64,43 @@ export default function Navbar() {
                 {label}
               </Link>
             ))}
+            <div ref={hireMenuRef} className="relative">
+              <button
+                type="button"
+                className={`inline-flex items-center gap-1 ${linkClass} cursor-pointer border-0 bg-transparent p-0 font-[inherit]`}
+                aria-expanded={hireMenuOpen}
+                aria-haspopup="menu"
+                aria-controls="sk-hire-funnel-menu"
+                id="sk-hire-funnel-trigger"
+                onClick={(e) => {
+                  e.stopPropagation();
+                  setHireMenuOpen((o) => !o);
+                }}
+              >
+                Hire specialists
+                <ChevronDown className={`h-4 w-4 shrink-0 transition-transform ${hireMenuOpen ? 'rotate-180' : ''}`} aria-hidden />
+              </button>
+              {hireMenuOpen ? (
+                <div
+                  id="sk-hire-funnel-menu"
+                  role="menu"
+                  aria-labelledby="sk-hire-funnel-trigger"
+                  className="absolute left-0 top-full z-[120] mt-2 min-w-[240px] rounded-sk-md border border-sk-purple-light/25 bg-sk-navy py-2 shadow-xl"
+                >
+                  {hireConversionLinks.map(({ to, label }) => (
+                    <Link
+                      key={to}
+                      to={to}
+                      role="menuitem"
+                      className="block px-4 py-2.5 text-sm font-medium text-sk-purple-light no-underline hover:bg-white/10"
+                      onClick={() => setHireMenuOpen(false)}
+                    >
+                      {label}
+                    </Link>
+                  ))}
+                </div>
+              ) : null}
+            </div>
           </div>
         </div>
 
@@ -90,6 +148,17 @@ export default function Navbar() {
                 onClick={() => setMobileOpen(false)}
                 className={`rounded-sk-md px-3 py-3.5 ${linkClass}`}
                 title={title}
+              >
+                {label}
+              </Link>
+            ))}
+            <p className="mt-3 px-3 text-[11px] font-bold uppercase tracking-wider text-sk-gold">Hire specialists</p>
+            {hireConversionLinks.map(({ to, label }) => (
+              <Link
+                key={to}
+                to={to}
+                onClick={() => setMobileOpen(false)}
+                className={`rounded-sk-md px-3 py-3.5 ${linkClass}`}
               >
                 {label}
               </Link>

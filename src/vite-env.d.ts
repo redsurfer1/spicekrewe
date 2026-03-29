@@ -1,5 +1,10 @@
 /// <reference types="vite/client" />
 
+declare module '*.mdx?raw' {
+  const src: string;
+  export default src;
+}
+
 interface ImportMetaEnv {
   readonly VITE_GEMINI_API_KEY?: string;
   readonly VITE_AIRTABLE_API_KEY?: string;

@@ -91,6 +91,31 @@ export default function Footer() {
                   Join as a professional
                 </Link>
               </li>
+              <li>
+                <Link to="/guides/pricing-2025" className={`opacity-90 ${linkHoverClass}`} style={linkMuted}>
+                  2025 service rates
+                </Link>
+              </li>
+              <li>
+                <Link to="/hire/recipe-developer" className={`opacity-90 ${linkHoverClass}`} style={linkMuted}>
+                  Hire recipe developer
+                </Link>
+              </li>
+              <li>
+                <Link to="/hire/food-stylist" className={`opacity-90 ${linkHoverClass}`} style={linkMuted}>
+                  Hire food stylist
+                </Link>
+              </li>
+              <li>
+                <Link to="/hire/culinary-consultant" className={`opacity-90 ${linkHoverClass}`} style={linkMuted}>
+                  Hire culinary consultant
+                </Link>
+              </li>
+              <li>
+                <Link to="/locations/memphis" className={`opacity-90 ${linkHoverClass}`} style={linkMuted}>
+                  Memphis
+                </Link>
+              </li>
             </ul>
           </div>
 

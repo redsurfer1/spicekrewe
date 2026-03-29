@@ -3,6 +3,7 @@ import { CheckCircle2 } from 'lucide-react';
 import Navbar from '../components/Navigation';
 import Footer from '../components/Footer';
 import SEO from '../components/SEO';
+import BriefExplainer from '../components/BriefExplainer';
 
 const DASHBOARD_PATH = '/dashboard/briefs';
 
@@ -19,6 +20,9 @@ export default function HireSuccess() {
       />
       <Navbar />
       <main style={{ flex: 1, padding: '40px 16px 56px' }}>
+        <div style={{ maxWidth: 540, margin: '0 auto 20px', boxSizing: 'border-box' }}>
+          <BriefExplainer />
+        </div>
         <div
           style={{
             maxWidth: 540,

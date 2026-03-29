@@ -4,6 +4,7 @@ import { Lock, Sparkles, Users } from 'lucide-react';
 import Navbar from '../components/Navigation';
 import Footer from '../components/Footer';
 import SEO from '../components/SEO';
+import BriefExplainer from '../components/BriefExplainer';
 import { fetchTalentDirectory, getTalentById, TALENT_FALLBACK } from '../data/talent';
 import type { TalentRecord } from '../types/talentRecord';
 import type { CulinaryNeedSummary } from '../lib/ai/briefGenerator';
@@ -259,6 +260,9 @@ export default function HireFlow() {
       <Navbar />
 
       <main style={{ flex: 1, padding: '24px 16px 48px', width: '100%', boxSizing: 'border-box' }}>
+        <div style={{ maxWidth: 560, width: '100%', margin: '0 auto 16px', boxSizing: 'border-box' }}>
+          <BriefExplainer />
+        </div>
         <div
           style={{
             maxWidth: 560,
