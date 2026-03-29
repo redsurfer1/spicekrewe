@@ -37,7 +37,7 @@ export default function SEO({
   path = '',
   structuredData,
 }: SEOProps) {
-  const url = path ? `${SITE_URL.replace(/\/$/, '')}${path.startsWith('/') ? path : `/${path}`}` : SITE_URL;
+  const canonicalUrl = resolveCanonicalUrl(path);
 
   const jsonLd =
     structuredData === undefined

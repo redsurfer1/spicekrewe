@@ -1,24 +1,62 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 import { useApp } from '../contexts/AppContext';
 import { Lock, Eye, EyeOff, Map } from 'lucide-react';
 
-const ADMIN_PASSWORD = 'spicekrewe2024';
+const TOKEN_KEY = 'sk_admin_token';
+
+function apiPath(p: string): string {
+  const base = import.meta.env.VITE_APP_ORIGIN?.replace(/\/$/, '') ?? '';
+  return `${base}${p}`;
+}
 
 export default function AdminDashboard() {
   const [password, setPassword] = useState('');
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [isAuthenticated, setIsAuthenticated] = useState(() =>
+    Boolean(typeof sessionStorage !== 'undefined' && sessionStorage.getItem(TOKEN_KEY)),
+  );
   const [error, setError] = useState('');
+  const [loginLoading, setLoginLoading] = useState(false);
   const { showMap, setShowMap } = useApp();
 
-  const handleLogin = (e: React.FormEvent) => {
+  useEffect(() => {
+    const t = sessionStorage.getItem(TOKEN_KEY);
+    if (t) setIsAuthenticated(true);
+  }, []);
+
+  const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (password === ADMIN_PASSWORD) {
-      setIsAuthenticated(true);
-      setError('');
-    } else {
-      setError('Incorrect password');
-      setPassword('');
+    setLoginLoading(true);
+    setError('');
+    try {
+      const res = await fetch(apiPath('/api/admin/session'), {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+        body: JSON.stringify({ password }),
+      });
+      const json = (await res.json().catch(() => null)) as { token?: string; error?: string };
+      if (!res.ok) {
+        setError(json?.error || 'Login failed');
+        setPassword('');
+        return;
+      }
+      if (json?.token) {
+        sessionStorage.setItem(TOKEN_KEY, json.token);
+        setIsAuthenticated(true);
+        setPassword('');
+      } else {
+        setError('Invalid server response');
+      }
+    } catch {
+      setError('Could not reach admin session API. Is the server deployed?');
+    } finally {
+      setLoginLoading(false);
     }
+  };
+
+  const handleLogout = () => {
+    sessionStorage.removeItem(TOKEN_KEY);
+    setIsAuthenticated(false);
   };
 
   const handleToggle = () => {
@@ -38,7 +76,7 @@ export default function AdminDashboard() {
             Admin Dashboard
           </h1>
           <p className="text-gray-600 text-center mb-8">
-            Enter password to access settings
+            Enter password to access settings (server-verified).
           </p>
           <form onSubmit={handleLogin}>
             <div className="mb-4">
@@ -53,6 +91,7 @@ export default function AdminDashboard() {
                 className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-spice-purple focus:border-transparent transition"
                 placeholder="Enter admin password"
                 autoFocus
+                disabled={loginLoading}
               />
             </div>
             {error && (
@@ -62,9 +101,10 @@ export default function AdminDashboard() {
             )}
             <button
               type="submit"
-              className="w-full bg-spice-purple text-white py-3 rounded-lg font-semibold hover:bg-spice-purple/90 transition"
+              disabled={loginLoading}
+              className="w-full bg-spice-purple text-white py-3 rounded-lg font-semibold hover:bg-spice-purple/90 transition disabled:opacity-50"
             >
-              Login
+              {loginLoading ? 'Signing in…' : 'Login'}
             </button>
           </form>
         </div>
@@ -86,10 +126,19 @@ export default function AdminDashboard() {
           </div>
 
           <div className="p-6 sm:p-8">
+            <div className="mb-6 rounded-sk-md border border-sk-card-border bg-gray-50 p-4">
+              <p className="text-sm text-gray-700 mb-2">
+                <Link to="/admin/health" className="font-semibold text-spice-purple hover:underline">
+                  System health dashboard
+                </Link>{' '}
+                — Airtable connectivity, Stripe webhooks, recent brief syncs (obfuscated).
+              </p>
+            </div>
+
             <div className="bg-gray-50 rounded-sk-md p-6 border border-sk-card-border">
               <div className="flex items-start gap-4">
                 <div className="bg-spice-purple/10 p-3 rounded-lg">
-                  <Map className="w-6 h-6 text-spice-purple" />
+                  <Map className="w-6 h-6 text-spice-purple" aria-hidden />
                 </div>
                 <div className="flex-1">
                   <h2 className="text-xl font-semibold text-gray-900 mb-2">
@@ -108,17 +157,18 @@ export default function AdminDashboard() {
                     <div className="flex items-center gap-3">
                       {showMap ? (
                         <>
-                          <Eye className="w-5 h-5 text-green-600" />
+                          <Eye className="w-5 h-5 text-green-600" aria-hidden />
                           <span className="font-semibold text-gray-900">Map is Visible</span>
                         </>
                       ) : (
                         <>
-                          <EyeOff className="w-5 h-5 text-gray-400" />
+                          <EyeOff className="w-5 h-5 text-gray-400" aria-hidden />
                           <span className="font-semibold text-gray-900">Map is Hidden</span>
                         </>
                       )}
                     </div>
                     <button
+                      type="button"
                       onClick={handleToggle}
                       className={`relative inline-flex h-8 w-14 items-center rounded-full transition-colors focus:outline-none focus:ring-2 focus:ring-spice-purple focus:ring-offset-2 ${
                         showMap ? 'bg-green-600' : 'bg-gray-300'
@@ -150,7 +200,8 @@ export default function AdminDashboard() {
                 ← Back to Website
               </a>
               <button
-                onClick={() => setIsAuthenticated(false)}
+                type="button"
+                onClick={handleLogout}
                 className="px-4 py-2 border border-gray-300 rounded-lg hover:bg-gray-50 transition font-medium text-gray-700"
               >
                 Logout

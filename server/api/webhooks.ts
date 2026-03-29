@@ -51,6 +51,18 @@ export default async function handler(req: VercelRequest, res: VercelResponse): 
       res.status(500).json({ error: applied.error.message });
       return;
     }
+    // SOC2 audit trail — Stripe event id + brief id (no card data).
+    // eslint-disable-next-line no-console
+    console.log(
+      JSON.stringify({
+        audit: true,
+        level: 'info',
+        event: 'stripe.checkout.session.completed',
+        stripeEventId: event.id,
+        briefId: session.client_reference_id ?? null,
+        paymentStatus: session.payment_status,
+      }),
+    );
   }
 
   res.status(200).json({ received: true });

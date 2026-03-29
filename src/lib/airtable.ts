@@ -5,7 +5,6 @@
 
 import type { Result } from './types/results';
 import type { TalentRecord } from '../types/talentRecord';
-import { HireBriefSchema, type HireBriefInput } from './validation';
 
 type AirtableRecord<T = Record<string, unknown>> = {
   id: string;
@@ -17,22 +16,16 @@ type AirtableListResponse = {
   offset?: string;
 };
 
-type AirtableCreateResponse = {
-  records: { id: string }[];
-};
-
 function getEnv(): {
   apiKey: string | undefined;
   baseId: string | undefined;
   professionalsTable: string;
-  briefsTable: string;
 } {
   const env = import.meta.env;
   return {
     apiKey: env.VITE_AIRTABLE_API_KEY as string | undefined,
     baseId: env.VITE_AIRTABLE_BASE_ID as string | undefined,
     professionalsTable: (env.VITE_AIRTABLE_PROFESSIONALS_TABLE as string) || 'Professionals',
-    briefsTable: (env.VITE_AIRTABLE_BRIEFS_TABLE as string) || 'Briefs',
   };
 }
 
@@ -168,103 +161,4 @@ export async function fetchProfessionals(): Promise<Result<TalentRecord[], Error
     const err = e instanceof Error ? e : new Error(String(e));
     return { success: false, error: err };
   }
-}
-
-/**
- * Create a row in the Briefs table. Validates payload with HireBriefSchema first.
- */
-export async function submitProjectBrief(brief: unknown): Promise<Result<{ recordId: string }, Error>> {
-  if (missingConfig()) {
-    return { success: false, error: new Error('Airtable is not configured') };
-  }
-
-  const parsed = HireBriefSchema.safeParse(brief);
-  if (!parsed.success) {
-    return {
-      success: false,
-      error: new Error(parsed.error.issues.map((i) => i.message).join('; ')),
-    };
-  }
-
-  const data: HireBriefInput = parsed.data;
-  const { baseId, briefsTable } = getEnv();
-
-  const primaryIds = (data.primaryInterestTalentIds ?? []).filter(Boolean);
-  const fields: Record<string, string | number | boolean | string[]> = {
-    ClientName: data.clientName,
-    ProjectTitle: data.projectTitle,
-    BudgetRange: data.budgetRange,
-    Timeline: data.timeline,
-    Description: data.description,
-    RequiredSkills: data.requiredSkills.join('; '),
-  };
-
-  if (primaryIds.length) {
-    fields.PrimaryInterestTalentIds = primaryIds.join('; ');
-  }
-  if (data.sourceTalentId?.trim()) {
-    fields.SourceTalentId = data.sourceTalentId.trim();
-  }
-
-  const path = `${baseId}/${encodeURIComponent(briefsTable)}`;
-  const fr = await airtableFetch(path, {
-    method: 'POST',
-    body: JSON.stringify({ records: [{ fields }] }),
-  });
-
-  if (!fr.success) return fr;
-
-  if (!fr.data.ok) {
-    const text = await fr.data.text().catch(() => fr.data.statusText);
-    return {
-      success: false,
-      error: new Error(`Airtable ${fr.data.status}: ${text.slice(0, 300)}`),
-    };
-  }
-
-  try {
-    const json = (await fr.data.json()) as AirtableCreateResponse;
-    const id = json.records?.[0]?.id;
-    if (!id) return { success: false, error: new Error('Airtable returned no record id') };
-    return { success: true, data: { recordId: id } };
-  } catch (e) {
-    const err = e instanceof Error ? e : new Error(String(e));
-    return { success: false, error: err };
-  }
-}
-
-/**
- * Patch a Briefs row (e.g. posting tier after the client chooses Standard vs Featured).
- * Add matching field names in Airtable: PostingTier, PrimaryInterestTalentIds, SourceTalentId.
- */
-export async function patchBriefRecord(
-  recordId: string,
-  fields: Record<string, string | number | boolean>,
-): Promise<Result<void, Error>> {
-  if (missingConfig()) {
-    return { success: false, error: new Error('Airtable is not configured') };
-  }
-  const id = recordId?.trim();
-  if (!id) {
-    return { success: false, error: new Error('recordId is required') };
-  }
-
-  const { baseId, briefsTable } = getEnv();
-  const path = `${baseId}/${encodeURIComponent(briefsTable)}/${encodeURIComponent(id)}`;
-  const fr = await airtableFetch(path, {
-    method: 'PATCH',
-    body: JSON.stringify({ fields }),
-  });
-
-  if (!fr.success) return fr;
-
-  if (!fr.data.ok) {
-    const text = await fr.data.text().catch(() => fr.data.statusText);
-    return {
-      success: false,
-      error: new Error(`Airtable ${fr.data.status}: ${text.slice(0, 300)}`),
-    };
-  }
-
-  return { success: true, data: undefined };
 }

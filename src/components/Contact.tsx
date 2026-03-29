@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { Link } from 'react-router-dom';
 import { Mail, Phone, MapPin, Send } from 'lucide-react';
 import { api } from '../services/api';
 
@@ -10,10 +11,19 @@ export default function Contact() {
     message: '',
   });
 
+  const [contactDataConsent, setContactDataConsent] = useState(false);
+  const [newsletterEmail, setNewsletterEmail] = useState('');
+  const [newsletterConsent, setNewsletterConsent] = useState(false);
+  const [newsletterBusy, setNewsletterBusy] = useState(false);
+
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    if (!contactDataConsent) {
+      alert('Please confirm data processing consent to send your message.');
+      return;
+    }
     setIsSubmitting(true);
 
     try {
@@ -76,7 +86,7 @@ export default function Contact() {
 
                 <div className="flex items-start">
                   <div className="bg-spice-blue/10 p-3 rounded-lg mr-4">
-                    <Phone className="text-spice-blue" size={24} />
+                    <Phone className="text-spice-blue" size={24} aria-hidden />
                   </div>
                   <div>
                     <h4 className="font-semibold text-gray-900 mb-1">Phone</h4>
@@ -101,21 +111,64 @@ export default function Contact() {
               <p className="mb-6 text-white/90">
                 Stay updated with our latest events, news, and community highlights.
               </p>
-              <div className="flex gap-2">
-                <label htmlFor="newsletter-email" className="sr-only">
-                  Email address for newsletter
+              <div className="flex flex-col gap-3">
+                <div className="flex gap-2">
+                  <label htmlFor="newsletter-email" className="sr-only">
+                    Email address for newsletter
+                  </label>
+                  <input
+                    id="newsletter-email"
+                    type="email"
+                    name="newsletter-email"
+                    autoComplete="email"
+                    value={newsletterEmail}
+                    onChange={(e) => setNewsletterEmail(e.target.value)}
+                    placeholder="Enter your email"
+                    className="flex-1 px-4 py-3 rounded-lg text-gray-900 focus:outline-none focus:ring-2 focus:ring-white"
+                  />
+                  <button
+                    type="button"
+                    disabled={newsletterBusy || !newsletterConsent || !newsletterEmail.trim()}
+                    onClick={async () => {
+                      if (!newsletterConsent) {
+                        alert('Please confirm consent to receive marketing emails.');
+                        return;
+                      }
+                      setNewsletterBusy(true);
+                      try {
+                        const result = await api.subscribeNewsletter({ email: newsletterEmail.trim() });
+                        if (result.success) {
+                          alert('Thanks — you are subscribed.');
+                          setNewsletterEmail('');
+                          setNewsletterConsent(false);
+                        } else {
+                          alert(result.error || 'Could not subscribe right now.');
+                        }
+                      } finally {
+                        setNewsletterBusy(false);
+                      }
+                    }}
+                    className="bg-white text-spice-purple px-6 py-3 rounded-lg font-semibold hover:bg-gray-100 transition-colors duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
+                  >
+                    {newsletterBusy ? '…' : 'Subscribe'}
+                  </button>
+                </div>
+                <label className="flex items-start gap-2 text-sm text-white/95 cursor-pointer">
+                  <input
+                    type="checkbox"
+                    checked={newsletterConsent}
+                    onChange={(e) => setNewsletterConsent(e.target.checked)}
+                    className="mt-1 h-4 w-4 shrink-0 accent-white"
+                  />
+                  <span>
+                    I agree to receive occasional updates about Spice Krewe and accept the processing of my email
+                    as described in the{' '}
+                    <Link to="/privacy" className="underline font-medium">
+                      Privacy Policy
+                    </Link>
+                    .
+                  </span>
                 </label>
-                <input
-                  id="newsletter-email"
-                  type="email"
-                  name="newsletter-email"
-                  autoComplete="email"
-                  placeholder="Enter your email"
-                  className="flex-1 px-4 py-3 rounded-lg text-gray-900 focus:outline-none focus:ring-2 focus:ring-white"
-                />
-                <button className="bg-white text-spice-purple px-6 py-3 rounded-lg font-semibold hover:bg-gray-100 transition-colors duration-200">
-                  Subscribe
-                </button>
               </div>
             </div>
           </div>
@@ -187,9 +240,26 @@ export default function Contact() {
                 />
               </div>
 
+              <label className="flex items-start gap-2 text-sm text-gray-700 cursor-pointer">
+                <input
+                  type="checkbox"
+                  checked={contactDataConsent}
+                  onChange={(e) => setContactDataConsent(e.target.checked)}
+                  className="mt-1 h-4 w-4 shrink-0 accent-spice-purple"
+                />
+                <span>
+                  I consent to Spice Krewe processing my contact details to respond to this inquiry, as described
+                  in the{' '}
+                  <Link to="/privacy" className="text-spice-purple font-medium underline-offset-2 hover:underline">
+                    Privacy Policy
+                  </Link>
+                  .
+                </span>
+              </label>
+
               <button
                 type="submit"
-                disabled={isSubmitting}
+                disabled={isSubmitting || !contactDataConsent}
                 className="w-full bg-spice-purple text-white py-4 rounded-lg font-semibold hover:bg-spice-blue transition-colors duration-200 shadow-md hover:shadow-lg flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
               >
                 {isSubmitting ? 'Sending...' : 'Send Message'}

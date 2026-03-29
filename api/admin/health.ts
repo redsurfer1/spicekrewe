@@ -1,0 +1,60 @@
+import type { VercelRequest, VercelResponse } from '@vercel/node';
+import { readBearerToken, verifyAdminToken } from '../../server/lib/admin-token';
+import { listRecentBriefsForAudit, pingAirtableBriefsTable } from '../../server/lib/airtable-brief';
+import type { BriefAuditRow } from '../../server/lib/airtable-brief';
+
+function cors(res: VercelResponse, origin: string | undefined): void {
+  const allow = process.env.SERVER_ALLOWED_ORIGIN?.trim() || origin || '*';
+  res.setHeader('Access-Control-Allow-Origin', allow);
+  res.setHeader('Access-Control-Allow-Methods', 'GET, OPTIONS');
+  res.setHeader('Access-Control-Allow-Headers', 'Authorization, Content-Type');
+}
+
+export default async function handler(req: VercelRequest, res: VercelResponse): Promise<void> {
+  const origin = typeof req.headers.origin === 'string' ? req.headers.origin : undefined;
+  cors(res, origin);
+
+  if (req.method === 'OPTIONS') {
+    res.status(204).end();
+    return;
+  }
+
+  if (req.method !== 'GET') {
+    res.status(405).json({ error: 'Method not allowed' });
+    return;
+  }
+
+  const token = readBearerToken(req.headers.authorization);
+  if (!token || !verifyAdminToken(token)) {
+    res.status(401).json({ error: 'Unauthorized' });
+    return;
+  }
+
+  const stripeWebhookOk = Boolean(
+    process.env.STRIPE_WEBHOOK_SECRET?.trim() && process.env.STRIPE_SECRET_KEY?.trim(),
+  );
+
+  const airtablePing = await pingAirtableBriefsTable();
+  const recent = await listRecentBriefsForAudit(5);
+
+  res.status(200).json({
+    generatedAt: new Date().toISOString(),
+    airtable: {
+      status: airtablePing.success ? 'connected' : 'error',
+      detail: airtablePing.success ? undefined : airtablePing.error.message,
+    },
+    stripeWebhook: {
+      status: stripeWebhookOk ? 'configured' : 'not_configured',
+      listener: stripeWebhookOk ? 'active' : 'inactive',
+    },
+    recentBriefSyncs: recent.success
+      ? recent.data.map((r: BriefAuditRow) => ({
+          recordIdSuffix: r.recordId.replace(/^rec/, '').slice(-6),
+          createdTime: r.createdTime,
+          projectTitle: r.projectTitleObfuscated,
+          clientName: r.clientNameObfuscated,
+        }))
+      : [],
+    recentBriefsError: recent.success ? undefined : recent.error.message,
+  });
+}

@@ -134,9 +134,9 @@ export default function Footer() {
             2025 Spice Krewe
           </p>
           <div className="flex gap-6 text-sm" style={{ color: 'rgba(255,255,255,0.55)' }}>
-            <a href="#" className="hover:text-white transition-colors">
+            <Link to="/privacy" className="hover:text-white transition-colors">
               Privacy Policy
-            </a>
+            </Link>
             <a href="#" className="hover:text-white transition-colors">
               Terms of Service
             </a>

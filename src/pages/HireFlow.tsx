@@ -9,7 +9,7 @@ import type { TalentRecord } from '../types/talentRecord';
 import type { CulinaryNeedSummary } from '../lib/ai/briefGenerator';
 import type { MatchRecommendation } from '../lib/ai/matchmaker';
 import { parseHireBrief } from '../lib/validation';
-import { patchBriefRecord, submitProjectBrief } from '../lib/airtable';
+import { patchBriefRecord, submitProjectBrief } from '../lib/brief-api';
 import { isClientStripeCheckoutEnabled } from '../lib/stripe-config';
 
 const STEPS = 3;

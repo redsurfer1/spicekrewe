@@ -5,7 +5,8 @@ interface ImportMetaEnv {
   readonly VITE_AIRTABLE_API_KEY?: string;
   readonly VITE_AIRTABLE_BASE_ID?: string;
   readonly VITE_AIRTABLE_PROFESSIONALS_TABLE?: string;
-  readonly VITE_AIRTABLE_BRIEFS_TABLE?: string;
+  /** Optional absolute site origin for API calls (e.g. https://spicekrewe.com). Leave empty for same-origin. */
+  readonly VITE_APP_ORIGIN?: string;
   /** Stripe publishable key (client-visible; server must hold the secret key). */
   readonly VITE_STRIPE_PUBLIC_KEY?: string;
   /** POST target for your serverless handler that creates a Checkout Session and returns `{ url }`. */

@@ -7,4 +7,10 @@ export default defineConfig({
   optimizeDeps: {
     exclude: ['lucide-react'],
   },
+  server: {
+    // Forward API routes to `vercel dev` (default :3000) when running `vite` alone.
+    proxy: {
+      '/api': { target: 'http://127.0.0.1:3000', changeOrigin: true },
+    },
+  },
 });
