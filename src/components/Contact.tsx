@@ -30,8 +30,7 @@ export default function Contact() {
         alert('Backend not available yet. Your message has been noted locally.');
         setFormData({ name: '', email: '', phone: '', message: '' });
       }
-    } catch (error) {
-      console.log('Backend connection error:', error);
+    } catch {
       alert('Form submitted successfully! (Backend connection pending)');
       setFormData({ name: '', email: '', phone: '', message: '' });
     } finally {
@@ -61,7 +60,7 @@ export default function Contact() {
 
         <div className="grid lg:grid-cols-2 gap-12">
           <div>
-            <div className="bg-white rounded-2xl shadow-xl p-8 mb-8">
+            <div className="bg-white border border-sk-card-border rounded-sk-md shadow-xl p-8 mb-8">
               <h3 className="text-2xl font-bold text-gray-900 mb-6">Contact Information</h3>
 
               <div className="space-y-6">
@@ -97,7 +96,7 @@ export default function Contact() {
               </div>
             </div>
 
-            <div className="bg-gradient-to-br from-spice-purple to-spice-blue rounded-2xl shadow-xl p-8 text-white">
+            <div className="bg-gradient-to-br from-spice-purple to-spice-blue border border-sk-card-border rounded-sk-md shadow-xl p-8 text-white">
               <h3 className="text-2xl font-bold mb-4">Join Our Newsletter</h3>
               <p className="mb-6 text-white/90">
                 Stay updated with our latest events, news, and community highlights.
@@ -115,7 +114,7 @@ export default function Contact() {
             </div>
           </div>
 
-          <div className="bg-white rounded-2xl shadow-xl p-8">
+          <div className="bg-white border border-sk-card-border rounded-sk-md shadow-xl p-8">
             <h3 className="text-2xl font-bold text-gray-900 mb-6">Send Us a Message</h3>
 
             <form onSubmit={handleSubmit} className="space-y-6">

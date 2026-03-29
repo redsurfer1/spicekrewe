@@ -14,8 +14,19 @@ const ROOT = path.join(__dirname, '..');
 const WIDTH = 1200;
 const HEIGHT = 630;
 const PADDING = 100;
-const SPICE_PURPLE = '#4d2f91';
-const SPICE_BLUE = '#0078cd';
+
+/** Read hex from src/index.css :root (node-canvas needs resolved colors, not var()). */
+function readCssHexVar(cssPath, varName) {
+  const css = fs.readFileSync(cssPath, 'utf8');
+  const re = new RegExp(`${varName.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}:\\s*#([0-9a-fA-F]{6})`);
+  const m = css.match(re);
+  if (!m) throw new Error(`Missing ${varName} hex in ${cssPath}`);
+  return `#${m[1]}`;
+}
+
+const INDEX_CSS = path.join(ROOT, 'src/index.css');
+const SPICE_PURPLE = readCssHexVar(INDEX_CSS, '--sk-purple');
+const SPICE_BLUE = readCssHexVar(INDEX_CSS, '--sk-blue');
 const LOGO_PATH = path.join(ROOT, 'public/assets/images/brand/SpiceKrewe_Logo_Transparent_background.png');
 const OUTPUT_PATH = path.join(ROOT, 'public/og-image.png');
 

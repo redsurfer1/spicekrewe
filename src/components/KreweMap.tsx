@@ -41,7 +41,7 @@ const SPICE_KREWE_LOCATIONS = [
 
 export default function KreweMap() {
   return (
-    <div className="w-full rounded-lg overflow-hidden border border-stone-200 shadow-md">
+    <div className="w-full rounded-sk-md overflow-hidden border border-sk-card-border shadow-md">
       <div className="h-[400px] w-full">
         <MapContainer
           center={MAP_CENTER}

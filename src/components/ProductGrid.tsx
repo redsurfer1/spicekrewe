@@ -49,7 +49,7 @@ export default function ProductGrid() {
 
   if (error) {
     return (
-      <div className="rounded-xl bg-red-50 border border-red-200 p-6 text-center">
+      <div className="rounded-sk-md bg-red-50 border border-sk-card-border p-6 text-center">
         <p className="text-red-700">{error}</p>
       </div>
     );
@@ -84,7 +84,7 @@ export default function ProductGrid() {
           {filteredProducts.map((product) => (
             <article
               key={product.id}
-              className="bg-white rounded-xl border border-gray-200 shadow-sm overflow-hidden hover:shadow-md hover:border-spice-purple/20 transition-all duration-200"
+              className="bg-white rounded-sk-md border border-sk-card-border shadow-sm overflow-hidden hover:shadow-md hover:border-spice-purple/20 transition-all duration-200"
             >
               <div className="p-5">
                 <span className="text-xs font-medium text-spice-purple uppercase tracking-wide">

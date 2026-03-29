@@ -28,7 +28,7 @@ export default function AdminDashboard() {
   if (!isAuthenticated) {
     return (
       <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100 flex items-center justify-center p-4">
-        <div className="bg-white rounded-2xl shadow-xl p-8 w-full max-w-md">
+        <div className="bg-white border border-sk-card-border rounded-sk-md shadow-xl p-8 w-full max-w-md">
           <div className="flex items-center justify-center mb-6">
             <div className="bg-spice-purple/10 p-4 rounded-full">
               <Lock className="w-8 h-8 text-spice-purple" />
@@ -56,7 +56,7 @@ export default function AdminDashboard() {
               />
             </div>
             {error && (
-              <div className="mb-4 p-3 bg-red-50 border border-red-200 rounded-lg">
+              <div className="mb-4 p-3 bg-red-50 border border-sk-card-border rounded-sk-md">
                 <p className="text-sm text-red-600">{error}</p>
               </div>
             )}
@@ -75,7 +75,7 @@ export default function AdminDashboard() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100 p-4 sm:p-8">
       <div className="max-w-4xl mx-auto">
-        <div className="bg-white rounded-2xl shadow-xl overflow-hidden">
+        <div className="bg-white border border-sk-card-border rounded-sk-md shadow-xl overflow-hidden">
           <div className="bg-gradient-to-r from-spice-purple to-spice-blue p-6 sm:p-8">
             <h1 className="text-3xl font-bold text-white mb-2">
               Admin Dashboard
@@ -86,7 +86,7 @@ export default function AdminDashboard() {
           </div>
 
           <div className="p-6 sm:p-8">
-            <div className="bg-gray-50 rounded-xl p-6 border border-gray-200">
+            <div className="bg-gray-50 rounded-sk-md p-6 border border-sk-card-border">
               <div className="flex items-start gap-4">
                 <div className="bg-spice-purple/10 p-3 rounded-lg">
                   <Map className="w-6 h-6 text-spice-purple" />
@@ -98,13 +98,13 @@ export default function AdminDashboard() {
                   <p className="text-gray-600 mb-4">
                     Control whether the "Find Spice Krewe" map section is displayed on the main website.
                   </p>
-                  <div className="bg-blue-50 border border-blue-200 rounded-lg p-4 mb-4">
+                  <div className="bg-blue-50 border border-sk-card-border rounded-sk-md p-4 mb-4">
                     <p className="text-sm text-blue-800">
                       <strong>Early Phase Note:</strong> The map is hidden by default during the early launch phase.
                       Toggle it on when you're ready to display location information to visitors.
                     </p>
                   </div>
-                  <div className="flex items-center justify-between bg-white rounded-lg p-4 border border-gray-200">
+                  <div className="flex items-center justify-between bg-white rounded-sk-md p-4 border border-sk-card-border">
                     <div className="flex items-center gap-3">
                       {showMap ? (
                         <>

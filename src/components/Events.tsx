@@ -89,7 +89,7 @@ export default function Events() {
             {events.map((event, index) => (
             <div
               key={index}
-              className="bg-gradient-to-br from-gray-50 to-white rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 overflow-hidden border border-gray-100 transform hover:-translate-y-2"
+              className="bg-gradient-to-br from-gray-50 to-white rounded-sk-md shadow-lg hover:shadow-2xl transition-all duration-300 overflow-hidden border border-sk-card-border transform hover:-translate-y-2"
             >
               <div className="bg-gradient-to-r from-spice-purple to-spice-blue h-48 flex items-center justify-center">
                 <Calendar size={64} className="text-white" />

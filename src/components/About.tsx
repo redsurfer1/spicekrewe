@@ -50,7 +50,7 @@ export default function About() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
           <h2 className="text-4xl sm:text-5xl font-bold text-spice-purple mb-4">
-            About Spice Krewe: Bringing People Together
+            About Spice Krewe: Hire Vetted Culinary Professionals
           </h2>
         </div>
 
@@ -77,7 +77,7 @@ export default function About() {
 
               <div className="relative flex justify-center items-center">
                 <div className="absolute inset-0 bg-gradient-to-br from-spice-purple to-spice-blue rounded-3xl transform rotate-3 opacity-20"></div>
-                <div className="relative bg-white p-8 rounded-3xl shadow-2xl">
+                <div className="relative bg-white p-8 border border-sk-card-border rounded-sk-md shadow-2xl">
                   <img
                     src="/assets/images/brand/logo-primary.png"
                     alt="Spice Krewe Logo"
@@ -95,7 +95,7 @@ export default function About() {
               </div>
             </div>
 
-            <div className="mb-20 bg-white p-10 rounded-3xl shadow-lg">
+            <div className="mb-20 bg-white p-10 border border-sk-card-border rounded-sk-md shadow-lg">
               <h3 className="text-3xl font-bold text-spice-purple mb-6 text-center">
                 Our Vision: The Culinary Operating System
               </h3>
@@ -107,7 +107,7 @@ export default function About() {
             <div className="mb-16">
               <h3 className="text-3xl font-bold text-gray-900 mb-10 text-center">Our Three Pillars</h3>
               <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-                <div className="bg-white p-8 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 border-t-4 border-spice-purple">
+                <div className="bg-white p-8 rounded-sk-md border border-sk-card-border border-t-4 border-t-spice-purple shadow-lg hover:shadow-xl transition-all duration-300">
                   <div className="w-16 h-16 bg-spice-purple/10 rounded-xl flex items-center justify-center mb-6 mx-auto">
                     <Briefcase className="text-spice-purple" size={32} />
                   </div>
@@ -118,7 +118,7 @@ export default function About() {
                   </p>
                 </div>
 
-                <div className="bg-white p-8 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 border-t-4 border-spice-blue">
+                <div className="bg-white p-8 rounded-sk-md border border-sk-card-border border-t-4 border-t-spice-blue shadow-lg hover:shadow-xl transition-all duration-300">
                   <div className="w-16 h-16 bg-spice-blue/10 rounded-xl flex items-center justify-center mb-6 mx-auto">
                     <GraduationCap className="text-spice-blue" size={32} />
                   </div>
@@ -129,7 +129,7 @@ export default function About() {
                   </p>
                 </div>
 
-                <div className="bg-white p-8 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 border-t-4 border-spice-purple">
+                <div className="bg-white p-8 rounded-sk-md border border-sk-card-border border-t-4 border-t-spice-purple shadow-lg hover:shadow-xl transition-all duration-300">
                   <div className="w-16 h-16 bg-spice-purple/10 rounded-xl flex items-center justify-center mb-6 mx-auto">
                     <TrendingUp className="text-spice-purple" size={32} />
                   </div>
@@ -142,7 +142,7 @@ export default function About() {
               </div>
             </div>
 
-            <div className="bg-gradient-to-br from-spice-purple to-spice-blue p-10 rounded-3xl shadow-2xl text-white">
+            <div className="bg-gradient-to-br from-spice-purple to-spice-blue p-10 border border-sk-card-border rounded-sk-md shadow-2xl text-white">
               <p className="text-xl leading-relaxed text-center max-w-4xl mx-auto">
                 {displayContent.closing} We're not just building a business; we're nurturing a movement that celebrates culinary artistry while embracing the possibilities of tomorrow.
               </p>
