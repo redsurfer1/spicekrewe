@@ -24,6 +24,31 @@ function obfuscateLabel(s: string): string {
   return `${t[0]}•••${t[t.length - 1]}`;
 }
 
+/**
+ * SOC2-friendly masking: emails → `j***@***.com`-style; names → `First•••last`.
+ * Use for any brief field that may contain a contact email or a display name.
+ */
+export function obfuscateEmailOrLabel(input: string): string {
+  const t = input.trim();
+  if (!t) return '•••';
+  if (t.includes('@')) {
+    const at = t.indexOf('@');
+    const local = t.slice(0, at).trim();
+    const domain = t.slice(at + 1).trim();
+    if (!local.length || !domain.length) {
+      return obfuscateLabel(t);
+    }
+    const first = local[0] ?? '•';
+    const lastDot = domain.lastIndexOf('.');
+    const tld =
+      lastDot >= 0 && lastDot < domain.length - 1
+        ? domain.slice(lastDot + 1).replace(/[^a-zA-Z0-9-]/g, '').slice(0, 24) || 'com'
+        : 'com';
+    return `${first}***@***.${tld}`;
+  }
+  return obfuscateLabel(t);
+}
+
 /** Maps DB row to legacy Airtable-style keys for existing pipeline code. */
 export function rowToBriefFields(row: Record<string, unknown>): BriefFieldsMap {
   const tr = row.technical_requirements;
@@ -267,18 +292,33 @@ export async function listRecentBriefsForAudit(pageSize: number): Promise<Result
     predictive_match_summary: string | null;
   }>;
 
-  const mapped: BriefAuditRow[] = rows.map((rec) => ({
-    recordId: rec.id,
-    createdTime: rec.created_at ?? null,
-    projectTitleObfuscated: obfuscateLabel(typeof rec.project_title === 'string' ? rec.project_title : 'Brief'),
-    clientNameObfuscated: obfuscateLabel(typeof rec.client_name === 'string' ? rec.client_name : 'Client'),
-    predictiveMatchSummary:
+  const mapped: BriefAuditRow[] = rows.map((rec) => {
+    const titleRaw = typeof rec.project_title === 'string' ? rec.project_title : 'Brief';
+    const clientRaw = typeof rec.client_name === 'string' ? rec.client_name : 'Client';
+    const pmRaw =
       typeof rec.predictive_match_summary === 'string' && rec.predictive_match_summary.trim()
         ? rec.predictive_match_summary.trim().slice(0, 2000)
-        : undefined,
-  }));
+        : '';
+
+    return {
+      recordId: rec.id,
+      createdTime: rec.created_at ?? null,
+      projectTitleObfuscated: obfuscateEmailOrLabel(titleRaw),
+      clientNameObfuscated: obfuscateEmailOrLabel(clientRaw),
+      predictiveMatchSummary: pmRaw ? obfuscateLabel(pmRaw) : undefined,
+    };
+  });
 
   return { success: true, data: mapped };
+}
+
+/**
+ * Admin health / SOC2 audit listing (same implementation as {@link listRecentBriefsForAudit}).
+ */
+export async function listRecentBriefsForHealth(
+  pageSize: number,
+): Promise<Result<BriefAuditRow[], Error>> {
+  return listRecentBriefsForAudit(pageSize);
 }
 
 export async function pingSupabaseBriefs(): Promise<Result<'ok', Error>> {

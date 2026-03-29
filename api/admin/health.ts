@@ -1,7 +1,7 @@
 import type { VercelRequest, VercelResponse } from '@vercel/node';
 import { readBearerToken, verifyAdminToken } from '../../server/lib/admin-token';
 import {
-  listRecentBriefsForAudit,
+  listRecentBriefsForHealth,
   measureSupabaseLatencyMs,
   pingSupabaseBriefs,
 } from '../../server/lib/supabase-brief';
@@ -41,7 +41,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse): 
 
   const supabasePing = await pingSupabaseBriefs();
   const latency = await measureSupabaseLatencyMs();
-  const recent = await listRecentBriefsForAudit(5);
+  const recent = await listRecentBriefsForHealth(5);
 
   res.status(200).json({
     generatedAt: new Date().toISOString(),
