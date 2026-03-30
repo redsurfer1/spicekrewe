@@ -39,3 +39,6 @@ lerna-debug.log*
 .env
 .env.server
 .env.server.local
+
+# Generated at prebuild / predev — see scripts/build-blog-registry.ts
+src/content/blog/registry-data.json
