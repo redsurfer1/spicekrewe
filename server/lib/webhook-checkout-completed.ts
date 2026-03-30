@@ -1,13 +1,13 @@
 import type Stripe from 'stripe';
-import type { Result } from './result';
-import { getBriefRecord, isBriefMarkedPaid, patchBriefRecord } from './supabase-brief';
+import type { Result } from './result.js';
+import { getBriefRecord, isBriefMarkedPaid, patchBriefRecord } from './supabase-brief.js';
 import {
   buildFallbackTrd,
   formatTrdForAirtable,
   generateTechnicalRequirementsDocument,
-} from './ai/autoScoper';
-import { runPredictiveMatchmakerAfterFeaturedPayment } from './matchmakerAlerts';
-import { ensureBookingForBrief } from './bookings';
+} from './ai/autoScoper.js';
+import { runPredictiveMatchmakerAfterFeaturedPayment } from './matchmakerAlerts.js';
+import { ensureBookingForBrief } from './bookings.js';
 
 function alreadyProcessedEvent(fields: Record<string, unknown>, stripeEventId: string): boolean {
   const prev = fields.StripeLastWebhookEventId ?? fields.stripeLastWebhookEventId;

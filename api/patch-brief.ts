@@ -1,9 +1,9 @@
 import type { VercelRequest, VercelResponse } from '@vercel/node';
 import { z } from 'zod';
-import { patchBriefRecord } from '../server/lib/supabase-brief';
-import { createRequestId } from '../server/lib/request-id';
-import { closeBookingForBrief, ensureBookingForBrief } from '../server/lib/bookings';
-import { sendReviewRequestEmail } from '../server/email/onboarding-sequence';
+import { patchBriefRecord } from '../server/lib/supabase-brief.js';
+import { createRequestId } from '../server/lib/request-id.js';
+import { closeBookingForBrief, ensureBookingForBrief } from '../server/lib/bookings.js';
+import { sendReviewRequestEmail } from '../server/email/onboarding-sequence.js';
 
 const BodySchema = z.object({
   recordId: z.string().min(3).max(64),

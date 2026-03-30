@@ -1,7 +1,7 @@
 import { Resend } from 'resend';
-import { ensureBookingForBrief } from '../lib/bookings';
-import { getBriefRecord, patchBriefRecord } from '../lib/supabase-brief';
-import { getSupabaseServiceRole } from '../lib/supabase';
+import { ensureBookingForBrief } from '../lib/bookings.js';
+import { getBriefRecord, patchBriefRecord } from '../lib/supabase-brief.js';
+import { getSupabaseServiceRole } from '../lib/supabase.js';
 
 function getResend(): Resend | null {
   const key = process.env.RESEND_API_KEY?.trim();

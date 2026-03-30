@@ -8,4 +8,4 @@ export const config = {
   },
 };
 
-export { default } from '../server/api/webhooks';
+export { default } from '../server/api/webhooks.js';

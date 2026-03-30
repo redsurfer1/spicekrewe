@@ -1,7 +1,7 @@
 import type { VercelRequest, VercelResponse } from '@vercel/node';
 import Stripe from 'stripe';
-import { handleCheckoutSessionCompleted } from '../lib/webhook-checkout-completed';
-import { sendOnboardingEmail1IfNeeded } from '../email/onboarding-sequence';
+import { handleCheckoutSessionCompleted } from '../lib/webhook-checkout-completed.js';
+import { sendOnboardingEmail1IfNeeded } from '../email/onboarding-sequence.js';
 
 function readRawBody(req: VercelRequest): Promise<Buffer> {
   return new Promise((resolve, reject) => {

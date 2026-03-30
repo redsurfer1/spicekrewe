@@ -1,1 +1,1 @@
-export { default } from '../server/api/checkout';
+export { default } from '../server/api/checkout.js';

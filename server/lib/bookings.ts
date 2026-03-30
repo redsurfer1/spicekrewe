@@ -1,6 +1,6 @@
 import { randomUUID } from 'node:crypto';
-import type { Result } from './result';
-import { getSupabaseServiceRole } from './supabase';
+import type { Result } from './result.js';
+import { getSupabaseServiceRole } from './supabase.js';
 
 /**
  * Ensures a `bookings` row exists for a brief (used for onboarding + match feedback).

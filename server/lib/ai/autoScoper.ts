@@ -1,5 +1,5 @@
 import { GoogleGenAI } from '@google/genai';
-import type { Result } from '../result';
+import type { Result } from '../result.js';
 
 const GEMINI_MODEL = 'gemini-1.5-flash';
 

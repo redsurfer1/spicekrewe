@@ -1,5 +1,5 @@
 import type { VercelRequest, VercelResponse } from '@vercel/node';
-import { createStripeCheckoutSession, parseCheckoutBody } from '../lib/checkout-session';
+import { createStripeCheckoutSession, parseCheckoutBody } from '../lib/checkout-session.js';
 
 function applyCors(res: VercelResponse, origin: string | undefined): void {
   const allow = process.env.SERVER_ALLOWED_ORIGIN?.trim() || origin || '*';

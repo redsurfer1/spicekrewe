@@ -1,8 +1,8 @@
-import type { TechnicalRequirementsDocument } from './ai/autoScoper';
-import { PROFESSIONAL_ROSTER, type ServerTalentRecord } from '../data/talentRoster';
-import { patchBriefRecord } from './supabase-brief';
-import { appendMatchmakerLog, type MatchmakerLogEntry } from './matchmakerLogStore';
-import { persistMatchmakerLogToDb } from './matchmakerLogDb';
+import type { TechnicalRequirementsDocument } from './ai/autoScoper.js';
+import { PROFESSIONAL_ROSTER, type ServerTalentRecord } from '../data/talentRoster.js';
+import { patchBriefRecord } from './supabase-brief.js';
+import { appendMatchmakerLog, type MatchmakerLogEntry } from './matchmakerLogStore.js';
+import { persistMatchmakerLogToDb } from './matchmakerLogDb.js';
 
 export type { MatchmakerLogEntry };
 
@@ -249,4 +249,4 @@ export async function runPredictiveMatchmakerAfterFeaturedPayment(
   });
 }
 
-export { getRecentMatchmakerLogs } from './matchmakerLogStore';
+export { getRecentMatchmakerLogs } from './matchmakerLogStore.js';

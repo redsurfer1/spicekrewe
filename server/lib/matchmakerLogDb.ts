@@ -1,5 +1,5 @@
-import { getSupabaseServiceRole } from './supabase';
-import type { MatchmakerLogEntry } from './matchmakerLogStore';
+import { getSupabaseServiceRole } from './supabase.js';
+import type { MatchmakerLogEntry } from './matchmakerLogStore.js';
 
 function projectNameFromMessage(message: string): string {
   const m = /^MATCH (?:FOUND|PENDING):\s*(.+?)(?:\s+—|\s*$)/.exec(message);

@@ -1,6 +1,6 @@
 import type { VercelRequest, VercelResponse } from '@vercel/node';
 import { z } from 'zod';
-import { getSupabaseServiceRole } from '../lib/supabase';
+import { getSupabaseServiceRole } from '../lib/supabase.js';
 
 const BodySchema = z.object({
   name: z.string().min(1).max(200),

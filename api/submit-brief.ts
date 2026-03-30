@@ -4,10 +4,10 @@
  * Auto-Scoper in `server/lib/webhook-checkout-completed.ts`, which writes `technical_requirements` (JSONB).
  */
 import type { VercelRequest, VercelResponse } from '@vercel/node';
-import { createBriefRecord } from '../server/lib/supabase-brief';
-import { createRequestId } from '../server/lib/request-id';
-import { HireBriefSchema } from '../server/lib/hire-brief-schema';
-import { sanitizeBriefShortText } from '../server/lib/sanitize-brief-fields';
+import { createBriefRecord } from '../server/lib/supabase-brief.js';
+import { createRequestId } from '../server/lib/request-id.js';
+import { HireBriefSchema } from '../server/lib/hire-brief-schema.js';
+import { sanitizeBriefShortText } from '../server/lib/sanitize-brief-fields.js';
 
 function cors(res: VercelResponse, origin: string | undefined): void {
   const allow = process.env.SERVER_ALLOWED_ORIGIN?.trim() || origin || '*';

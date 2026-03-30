@@ -1,5 +1,5 @@
-import type { Result } from './result';
-import { getSupabaseServiceRole } from './supabase';
+import type { Result } from './result.js';
+import { getSupabaseServiceRole } from './supabase.js';
 
 /** Legacy + DB-shaped fields for pipelines (Auto-Scoper, matchmaker). */
 export type BriefFieldsMap = Record<string, unknown>;

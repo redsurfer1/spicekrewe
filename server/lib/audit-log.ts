@@ -1,5 +1,5 @@
 import { randomUUID } from 'node:crypto';
-import { getSupabaseServiceRole } from './supabase';
+import { getSupabaseServiceRole } from './supabase.js';
 
 export type AuditLevel = 'error' | 'warn' | 'info';
 

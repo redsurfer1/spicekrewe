@@ -1,6 +1,6 @@
 import Stripe from 'stripe';
 import { z } from 'zod';
-import type { Result } from './result';
+import type { Result } from './result.js';
 
 const BodySchema = z.object({
   briefId: z.string().min(1, 'briefId is required'),

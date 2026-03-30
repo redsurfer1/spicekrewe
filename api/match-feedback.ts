@@ -1,1 +1,1 @@
-export { default } from '../server/api/match-feedback';
+export { default } from '../server/api/match-feedback.js';

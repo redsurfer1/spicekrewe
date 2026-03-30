@@ -1,4 +1,4 @@
-import { getSupabaseServiceRole } from './supabase';
+import { getSupabaseServiceRole } from './supabase.js';
 
 export type TrdPipelineCounts = {
   pending: number;

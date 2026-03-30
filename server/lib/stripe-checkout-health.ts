@@ -1,5 +1,5 @@
 import Stripe from 'stripe';
-import { getBriefRecord } from './supabase-brief';
+import { getBriefRecord } from './supabase-brief.js';
 
 export type StripeTrdPipelineStatus = 'OK' | 'DEGRADED' | 'CRITICAL' | 'UNKNOWN';
 
