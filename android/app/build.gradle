@@ -17,14 +17,13 @@ android {
         }
     }
     signingConfigs {
-        release {
-            def storeFileProp = project.findProperty('RELEASE_STORE_FILE')
-            def keyAliasProp = project.findProperty('RELEASE_KEY_ALIAS')
-            if (storeFileProp?.trim() && keyAliasProp?.trim()) {
+        def storeFileProp = project.findProperty('RELEASE_STORE_FILE')
+        if (storeFileProp && file(storeFileProp).exists()) {
+            release {
                 storeFile file(storeFileProp)
-                storePassword project.findProperty('RELEASE_STORE_PASSWORD') ?: ''
-                keyAlias keyAliasProp
-                keyPassword project.findProperty('RELEASE_KEY_PASSWORD') ?: ''
+                storePassword project.findProperty('RELEASE_STORE_PASSWORD')
+                keyAlias project.findProperty('RELEASE_KEY_ALIAS')
+                keyPassword project.findProperty('RELEASE_KEY_PASSWORD')
             }
         }
     }
@@ -33,14 +32,10 @@ android {
             debuggable false
             minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
-            signingConfig signingConfigs.release
+            if (signingConfigs.hasProperty('release')) {
+                signingConfig signingConfigs.release
+            }
         }
-    }
-}
-
-repositories {
-    flatDir{
-        dirs '../capacitor-cordova-android-plugins/src/main/libs', 'libs'
     }
 }
 
@@ -53,7 +48,6 @@ dependencies {
     testImplementation "junit:junit:$junitVersion"
     androidTestImplementation "androidx.test.ext:junit:$androidxJunitVersion"
     androidTestImplementation "androidx.test.espresso:espresso-core:$androidxEspressoCoreVersion"
-    implementation project(':capacitor-cordova-android-plugins')
 }
 
 apply from: 'capacitor.build.gradle'
@@ -65,4 +59,12 @@ try {
     }
 } catch(Exception e) {
     logger.info("google-services.json not found, google-services plugin not applied. Push Notifications won't work")
+}
+
+configurations.all {
+    resolutionStrategy.eachDependency { details ->
+        if (details.requested.group == 'org.jetbrains.kotlin') {
+            details.useVersion "1.8.22"
+        }
+    }
 }

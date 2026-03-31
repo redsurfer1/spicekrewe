@@ -22,6 +22,16 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
 
+            <!-- Deep Linking Support for Spice Krewe -->
+            <intent-filter android:autoVerify="true">
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+                <data android:scheme="https" android:host="www.spicekrewe.com" android:pathPrefix="/dashboard" />
+                <data android:scheme="https" android:host="www.spicekrewe.com" android:pathPrefix="/dashboard/admin" />
+                <data android:scheme="https" android:host="www.spicekrewe.com" android:pathPrefix="/login" />
+            </intent-filter>
+
         </activity>
 
         <provider
@@ -34,8 +44,6 @@
                 android:resource="@xml/file_paths"></meta-data>
         </provider>
     </application>
-
-    <!-- Permissions -->
 
     <uses-permission android:name="android.permission.INTERNET" />
 </manifest>
