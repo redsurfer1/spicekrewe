@@ -56,7 +56,8 @@ async function syncTechnicalRequirementsFromBrief(
         level: 'warn',
         event: 'auto_scoper.gemini_failed',
         briefId,
-        message: trdResult.error.message,
+        message:
+          trdResult.error instanceof Error ? trdResult.error.message : String(trdResult.error),
       }),
     );
   }
@@ -75,7 +76,7 @@ async function syncTechnicalRequirementsFromBrief(
         level: 'error',
         event: 'auto_scoper.brief_patch_failed',
         briefId,
-        message: patched.error.message,
+        message: patched.error instanceof Error ? patched.error.message : String(patched.error),
       }),
     );
     await patchBriefRecord(briefId, { TrdStatus: 'failed' });
@@ -121,7 +122,7 @@ export async function handleCheckoutSessionCompleted(
 
   const existing = await getBriefRecord(briefId);
   if (!existing.success) {
-    return existing;
+    return { success: false, error: existing.error };
   }
 
   const fields = existing.data.fields as Record<string, unknown>;
@@ -161,7 +162,7 @@ export async function handleCheckoutSessionCompleted(
   });
 
   if (!fallback.success) {
-    return fallback;
+    return { success: false, error: fallback.error };
   }
 
   if (isFeaturedMatchingCheckout(session)) {
