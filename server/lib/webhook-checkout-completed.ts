@@ -47,8 +47,8 @@ async function syncTechnicalRequirementsFromBrief(
   await patchBriefRecord(briefId, { TrdStatus: 'generating' });
 
   const trdResult = await generateTechnicalRequirementsDocument(description);
-  const trd = trdResult.success ? trdResult.data : buildFallbackTrd(description);
   if (!trdResult.success) {
+    const trdErr = trdResult.error;
     // eslint-disable-next-line no-console
     console.error(
       JSON.stringify({
@@ -56,11 +56,11 @@ async function syncTechnicalRequirementsFromBrief(
         level: 'warn',
         event: 'auto_scoper.gemini_failed',
         briefId,
-        message:
-          trdResult.error instanceof Error ? trdResult.error.message : String(trdResult.error),
+        message: trdErr instanceof Error ? trdErr.message : String(trdErr),
       }),
     );
   }
+  const trd = trdResult.success ? trdResult.data : buildFallbackTrd(description);
 
   const payload = formatTrdForAirtable(trd);
   const patched = await patchBriefRecord(briefId, {
@@ -69,6 +69,7 @@ async function syncTechnicalRequirementsFromBrief(
   });
 
   if (!patched.success) {
+    const patchErr = patched.error;
     // eslint-disable-next-line no-console
     console.error(
       JSON.stringify({
@@ -76,7 +77,7 @@ async function syncTechnicalRequirementsFromBrief(
         level: 'error',
         event: 'auto_scoper.brief_patch_failed',
         briefId,
-        message: patched.error instanceof Error ? patched.error.message : String(patched.error),
+        message: patchErr instanceof Error ? patchErr.message : String(patchErr),
       }),
     );
     await patchBriefRecord(briefId, { TrdStatus: 'failed' });
@@ -122,7 +123,8 @@ export async function handleCheckoutSessionCompleted(
 
   const existing = await getBriefRecord(briefId);
   if (!existing.success) {
-    return { success: false, error: existing.error };
+    const existingErr = existing.error;
+    return { success: false, error: existingErr };
   }
 
   const fields = existing.data.fields as Record<string, unknown>;
@@ -162,7 +164,8 @@ export async function handleCheckoutSessionCompleted(
   });
 
   if (!fallback.success) {
-    return { success: false, error: fallback.error };
+    const fallbackErr = fallback.error;
+    return { success: false, error: fallbackErr };
   }
 
   if (isFeaturedMatchingCheckout(session)) {
