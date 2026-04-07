@@ -84,11 +84,21 @@ export default async function handler(req: VercelRequest, res: VercelResponse): 
           ? 'UNKNOWN'
           : 'OK';
 
+  let supabaseDetail: string | undefined;
+  if (!supabasePing.success) {
+    supabaseDetail = supabasePing.error.message;
+  }
+
+  let recentBriefsError: string | undefined;
+  if (!recent.success) {
+    recentBriefsError = recent.error.message;
+  }
+
   res.status(200).json({
     generatedAt: new Date().toISOString(),
     supabase: {
       status: supabasePing.success ? 'connected' : 'error',
-      detail: supabasePing.success ? undefined : supabasePing.error.message,
+      detail: supabaseDetail,
       latencyMs: latency.success ? latency.data : undefined,
     },
     stripeWebhook: {
@@ -104,7 +114,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse): 
           predictiveMatchSummary: r.predictiveMatchSummary,
         }))
       : [],
-    recentBriefsError: recent.success ? undefined : recent.error.message,
+    recentBriefsError,
     matchmakerLogs,
     trdPipeline,
     matchQuality,

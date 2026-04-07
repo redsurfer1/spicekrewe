@@ -397,7 +397,8 @@ export async function measureSupabaseLatencyMs(): Promise<Result<number, Error>>
   const t0 = Date.now();
   const ping = await pingSupabaseBriefs();
   if (!ping.success) {
-    return { success: false, error: ping.error };
+    const pingErr = ping.error;
+    return { success: false, error: pingErr };
   }
   return { success: true, data: Date.now() - t0 };
 }

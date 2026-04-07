@@ -75,6 +75,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse): 
 
   const patched = await patchBriefRecord(recordId, flat);
   if (!patched.success) {
+    const patchErr = patched.error;
     // eslint-disable-next-line no-console
     console.error(
       JSON.stringify({
@@ -83,10 +84,10 @@ export default async function handler(req: VercelRequest, res: VercelResponse): 
         event: 'brief.patch_failed',
         requestId,
         recordId,
-        message: patched.error.message,
+        message: patchErr.message,
       }),
     );
-    res.status(502).json({ error: patched.error.message, requestId });
+    res.status(502).json({ error: patchErr.message, requestId });
     return;
   }
 

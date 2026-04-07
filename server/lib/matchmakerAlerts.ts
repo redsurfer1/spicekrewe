@@ -225,6 +225,7 @@ export async function runPredictiveMatchmakerAfterFeaturedPayment(
     WorkflowStatus: 'matched',
   });
   if (!patched.success) {
+    const patchErr = patched.error;
     // eslint-disable-next-line no-console
     console.error(
       JSON.stringify({
@@ -232,7 +233,7 @@ export async function runPredictiveMatchmakerAfterFeaturedPayment(
         level: 'warn',
         event: 'matchmaker.brief_patch_skipped',
         briefId,
-        detail: patched.error.message,
+        detail: patchErr.message,
       }),
     );
   }
