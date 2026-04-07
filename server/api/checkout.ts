@@ -34,7 +34,8 @@ export default async function handler(req: VercelRequest, res: VercelResponse): 
 
   const parsed = parseCheckoutBody(body);
   if (!parsed.success) {
-    res.status(400).json({ error: parsed.error.message });
+    const parseErr = parsed.error;
+    res.status(400).json({ error: parseErr.message });
     return;
   }
 
@@ -44,7 +45,8 @@ export default async function handler(req: VercelRequest, res: VercelResponse): 
     flow: 'chef_booking',
   });
   if (!sessionResult.success) {
-    res.status(502).json({ error: sessionResult.error.message });
+    const sessionErr = sessionResult.error;
+    res.status(502).json({ error: sessionErr.message });
     return;
   }
 

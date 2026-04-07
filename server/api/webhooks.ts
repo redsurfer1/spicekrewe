@@ -65,7 +65,8 @@ export default async function handler(req: VercelRequest, res: VercelResponse): 
       if (!dispatched) {
         const applied = await handleCheckoutSessionCompleted(session, event.id);
         if (!applied.success) {
-          res.status(500).json({ error: applied.error.message });
+          const appliedErr = applied.error;
+          res.status(500).json({ error: appliedErr.message });
           return;
         }
       }

@@ -107,6 +107,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse): 
 
   const created = await createBriefRecord(fields);
   if (!created.success) {
+    const createErr = created.error;
     // eslint-disable-next-line no-console
     console.error(
       JSON.stringify({
@@ -114,10 +115,10 @@ export default async function handler(req: VercelRequest, res: VercelResponse): 
         level: 'error',
         event: 'brief.submit_failed',
         requestId,
-        message: created.error.message,
+        message: createErr.message,
       }),
     );
-    res.status(502).json({ error: created.error.message, requestId });
+    res.status(502).json({ error: createErr.message, requestId });
     return;
   }
 
