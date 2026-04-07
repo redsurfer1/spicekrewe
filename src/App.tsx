@@ -23,9 +23,14 @@ import AdminDashboard from './components/AdminDashboard';
 import PrivacyPage from './pages/PrivacyPage';
 import TermsPage from './pages/TermsPage';
 import ContactPage from './pages/Contact';
+import DataRequestPage from './pages/DataRequest';
+import ConciergePage from './pages/ConciergePage';
+import ReviewPage from './pages/ReviewPage';
+import FoodTruckProfilePage from './pages/FoodTruckProfilePage';
 import AdminHealthPage from './pages/admin/Health';
 import AdminMfaVerify from './pages/admin/AdminMfaVerify';
 import { AppProvider } from './contexts/AppContext';
+import { CityProvider } from './context/CityContext';
 import { PageLoader } from './components/PageLoader';
 import { ProtectedRoute } from './components/ProtectedRoute';
 
@@ -37,6 +42,7 @@ function App() {
   return (
     <AppProvider>
       <BrowserRouter>
+        <CityProvider>
         <Routes>
           <Route path="/talent/aisha-laurent" element={<Navigate to="/talent/aisha-thompson" replace />} />
           <Route path="/" element={<HomePage />} />
@@ -60,6 +66,9 @@ function App() {
           <Route path="/join" element={<JoinAsProf />} />
           <Route path="/how-it-works" element={<PlaceholderPage />} />
           <Route path="/for-teams" element={<ForTeams />} />
+          <Route path="/concierge" element={<ConciergePage />} />
+          <Route path="/review" element={<ReviewPage />} />
+          <Route path="/food-trucks/:providerId" element={<FoodTruckProfilePage />} />
           <Route
             path="/login"
             element={
@@ -91,10 +100,12 @@ function App() {
           <Route path="/privacy" element={<PrivacyPage />} />
           <Route path="/terms" element={<TermsPage />} />
           <Route path="/contact" element={<ContactPage />} />
+          <Route path="/data-request" element={<DataRequestPage />} />
           <Route path="/admin/mfa-verify" element={<AdminMfaVerify />} />
           <Route path="/admin" element={<AdminDashboard />} />
           <Route path="/admin/health" element={<AdminHealthPage />} />
         </Routes>
+        </CityProvider>
       </BrowserRouter>
     </AppProvider>
   );
