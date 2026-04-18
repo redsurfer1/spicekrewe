@@ -134,9 +134,6 @@ export default function HomePage() {
               background: 'rgba(77, 47, 145, 0.2)',
             }}
           >
-            <div style={{ fontSize: 28, marginBottom: 8 }} aria-hidden>
-              👨‍🍳
-            </div>
             <h2 style={{ margin: '0 0 8px', color: '#fff', fontSize: 20, fontFamily: fontBarlow, fontWeight: 800 }}>
               Private Chef
             </h2>
@@ -158,9 +155,6 @@ export default function HomePage() {
               background: 'rgba(77, 47, 145, 0.2)',
             }}
           >
-            <div style={{ fontSize: 28, marginBottom: 8 }} aria-hidden>
-              🚚
-            </div>
             <h2 style={{ margin: '0 0 8px', color: '#fff', fontSize: 20, fontFamily: fontBarlow, fontWeight: 800 }}>
               Food Truck
             </h2>
