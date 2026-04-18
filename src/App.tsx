@@ -64,7 +64,7 @@ function App() {
           <Route path="/hire" element={<HireFlow />} />
           <Route path="/dashboard/briefs" element={<PlaceholderPage />} />
           <Route path="/join" element={<JoinAsProf />} />
-          <Route path="/how-it-works" element={<PlaceholderPage />} />
+          <Route path="/how-it-works" element={<Navigate to="/#how-it-works" replace />} />
           <Route path="/for-teams" element={<ForTeams />} />
           <Route path="/concierge" element={<ConciergePage />} />
           <Route path="/review" element={<ReviewPage />} />

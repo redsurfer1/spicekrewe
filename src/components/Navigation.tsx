@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { Menu, X } from 'lucide-react';
 import SpiceKreweWordmark from './SpiceKreweWordmark';
 import { CitySelector } from './CitySelector';
@@ -11,7 +11,7 @@ const primaryLinks: { to: string; label: string }[] = [
 ];
 
 const secondaryLinks: { to: string; label: string }[] = [
-  { to: '/how-it-works', label: 'How it works' },
+  { to: '/#how-it-works', label: 'How it works' },
   { to: '/about', label: 'About' },
 ];
 
@@ -24,10 +24,28 @@ const linkClass =
 export default function Navbar() {
   const [mobileOpen, setMobileOpen] = useState(false);
   const location = useLocation();
+  const navigate = useNavigate();
 
   useEffect(() => {
     setMobileOpen(false);
   }, [location.pathname, location.search]);
+
+  function handleAnchorLink(e: React.MouseEvent<HTMLAnchorElement>, href: string, closeMobile?: () => void) {
+    if (!href.startsWith('/#')) return;
+    e.preventDefault();
+    const hash = href.slice(1);
+    closeMobile?.();
+    if (location.pathname === '/') {
+      const el = document.querySelector(hash);
+      el?.scrollIntoView({ behavior: 'smooth' });
+    } else {
+      navigate('/');
+      setTimeout(() => {
+        const el = document.querySelector(hash);
+        el?.scrollIntoView({ behavior: 'smooth' });
+      }, 120);
+    }
+  }
 
   return (
     <header className="sticky top-0 z-[100] border-b border-sk-purple-light/20 bg-sk-navy backdrop-blur-md">
@@ -54,11 +72,22 @@ export default function Navbar() {
               </Link>
             ))}
             <span className="hidden xl:inline h-4 w-px bg-sk-purple-light/30" aria-hidden />
-            {secondaryLinks.map(({ to, label }) => (
-              <Link key={to} to={to} className={linkClass}>
-                {label}
-              </Link>
-            ))}
+            {secondaryLinks.map(({ to, label }) =>
+              to.startsWith('/#') ? (
+                <a
+                  key={to}
+                  href={to}
+                  className={linkClass}
+                  onClick={(e) => handleAnchorLink(e, to)}
+                >
+                  {label}
+                </a>
+              ) : (
+                <Link key={to} to={to} className={linkClass}>
+                  {label}
+                </Link>
+              )
+            )}
           </div>
         </div>
 
@@ -120,16 +149,27 @@ export default function Navbar() {
             >
               Join as a provider
             </Link>
-            {secondaryLinks.map(({ to, label }) => (
-              <Link
-                key={to}
-                to={to}
-                onClick={() => setMobileOpen(false)}
-                className={`rounded-sk-md px-3 py-3.5 ${linkClass}`}
-              >
-                {label}
-              </Link>
-            ))}
+            {secondaryLinks.map(({ to, label }) =>
+              to.startsWith('/#') ? (
+                <a
+                  key={to}
+                  href={to}
+                  className={`rounded-sk-md px-3 py-3.5 ${linkClass}`}
+                  onClick={(e) => handleAnchorLink(e, to, () => setMobileOpen(false))}
+                >
+                  {label}
+                </a>
+              ) : (
+                <Link
+                  key={to}
+                  to={to}
+                  onClick={() => setMobileOpen(false)}
+                  className={`rounded-sk-md px-3 py-3.5 ${linkClass}`}
+                >
+                  {label}
+                </Link>
+              )
+            )}
             <Link
               to="/login"
               onClick={() => setMobileOpen(false)}

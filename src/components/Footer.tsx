@@ -97,9 +97,9 @@ export default function Footer() {
                 </Link>
               </li>
               <li>
-                <Link to="/how-it-works" className={`opacity-90 ${linkHoverClass}`} style={linkMuted}>
+                <a href="/#how-it-works" className={`opacity-90 ${linkHoverClass}`} style={linkMuted}>
                   How it works
-                </Link>
+                </a>
               </li>
               <li>
                 <Link to="/for-teams" className={`opacity-90 ${linkHoverClass}`} style={linkMuted}>

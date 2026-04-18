@@ -25,6 +25,7 @@
   --sk-radius-lg:    14px;
   --sk-radius-pill:  999px;
 }
+html { scroll-behavior: smooth; }
 body { background: var(--sk-body-bg); }
 @tailwind base;
 @tailwind components;

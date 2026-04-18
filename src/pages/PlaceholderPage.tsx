@@ -4,7 +4,6 @@ import Footer from '../components/Footer';
 import SEO from '../components/SEO';
 
 const LABELS: Record<string, string> = {
-  '/how-it-works': 'How it works',
   '/dashboard/briefs': 'Your briefs',
 };
 

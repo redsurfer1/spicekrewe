@@ -221,7 +221,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section className="bg-[var(--sk-surface)] py-16">
+      <section id="how-it-works" className="bg-[var(--sk-surface)] py-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <h2 className="text-center text-4xl sm:text-5xl font-bold text-sk-navy mb-10">How it works</h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 items-stretch">
