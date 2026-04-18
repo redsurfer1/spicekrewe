@@ -80,10 +80,10 @@ export default function NewOrleansHirePage() {
                     </Link>
                   </div>
                   <Link
-                    to="/blog/new-orleans-culinary-talent"
+                    to="/blog"
                     className="text-sm font-semibold text-spice-purple no-underline hover:underline"
                   >
-                    Read the full New Orleans culinary talent guide →
+                    Explore the Spice Krewe culinary insights blog →
                   </Link>
                 </div>
               </div>
@@ -126,10 +126,10 @@ export default function NewOrleansHirePage() {
             <li>
               • Read{' '}
               <Link
-                to="/blog/new-orleans-culinary-talent"
+                to="/blog"
                 className="font-semibold text-spice-purple no-underline hover:underline"
               >
-                the complete New Orleans culinary talent guide
+                the Spice Krewe culinary insights blog
               </Link>
               .
             </li>

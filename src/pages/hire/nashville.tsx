@@ -102,10 +102,10 @@ export default function NashvilleHirePage() {
           </div>
           <p className="mx-auto mt-8 max-w-2xl text-center text-sm text-sk-text-muted">
             <Link
-              to="/blog/nashville-culinary-talent"
+              to="/blog"
               className="font-semibold text-spice-purple no-underline hover:underline"
             >
-              Read the full Nashville culinary talent guide →
+              Explore the Spice Krewe culinary insights blog →
             </Link>
           </p>
         </section>
@@ -133,10 +133,10 @@ export default function NashvilleHirePage() {
             <li>
               • Planning a longer read? Open{' '}
               <Link
-                to="/blog/nashville-culinary-talent"
+                to="/blog"
                 className="font-semibold text-spice-purple no-underline hover:underline"
               >
-                the complete Nashville culinary talent guide
+                the Spice Krewe culinary insights blog
               </Link>
               .
             </li>
