@@ -8,7 +8,7 @@ export default function Events() {
   const cards = [
     {
       title: 'Spring wedding season — book early',
-      body: 'Private chefs and food trucks fill fast for April–June. Lock your date with the concierge.',
+      body: 'Private chefs and food trucks fill fast for April–June. Lock your date with our concierge.',
       icon: Calendar,
     },
     {

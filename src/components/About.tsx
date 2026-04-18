@@ -37,7 +37,7 @@ export default function About() {
     story:
       'Spice Krewe was built in Memphis to solve a simple problem: booking a private chef or food truck for an event was harder than it needed to be.',
     vision:
-      'Phone calls, unanswered emails, and guesswork about pricing. We built a better way — a verified network, a free AI concierge, and secure payment so hosts can focus on the guest list — not the chase.',
+      'Phone calls, unanswered emails, and guesswork about pricing. We built a better way — a verified network, a concierge, and a secure payment process so hosts can focus on the guest list — not the chase.',
     pillars: {
       hire: `Today Spice Krewe connects ${cityDisplayName} with its best culinary professionals — vetted, verified, and ready to make your next event unforgettable.`,
       learn: 'Real chefs. Real trucks. Beautifully simple booking — from intimate dinners to corporate lots and outdoor gatherings.',
