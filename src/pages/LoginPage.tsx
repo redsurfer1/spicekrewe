@@ -11,7 +11,7 @@ type Tab = 'signin' | 'register';
 type Role = 'buyer' | 'talent';
 
 export default function LoginPage() {
-  const location = useLocation() as { state?: { defaultTab?: 'register'; reason?: string } };
+  const location = useLocation() as { state?: { defaultTab?: 'register'; reason?: string; from?: string } };
   const [tab, setTab] = useState<Tab>('signin');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -36,9 +36,10 @@ export default function LoginPage() {
 
   useEffect(() => {
     if (user) {
-      navigate('/dashboard');
+      const returnTo = location.state?.from;
+      navigate(returnTo || '/dashboard');
     }
-  }, [user, navigate]);
+  }, [user, navigate, location.state?.from]);
 
   const handleSignIn = async (e: FormEvent) => {
     e.preventDefault();
@@ -76,8 +77,11 @@ export default function LoginPage() {
           .maybeSingle();
 
         const userRole = profileData?.role || 'buyer';
+        const returnTo = location.state?.from;
 
-        if (userRole === 'admin') {
+        if (returnTo) {
+          navigate(returnTo);
+        } else if (userRole === 'admin') {
           navigate('/dashboard/admin');
         } else {
           navigate('/dashboard');
