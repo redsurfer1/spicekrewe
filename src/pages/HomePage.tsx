@@ -170,7 +170,7 @@ export default function HomePage() {
           </article>
         </div>
         <p style={{ margin: '0 auto 8px', maxWidth: 560, color: '#8a7aaa', fontSize: 14, lineHeight: 1.5 }}>
-          Not sure? Let our AI concierge help.{' '}
+          Not sure? Let our concierge help.{' '}
           <Link to="/concierge" style={{ color: '#3275bd', fontWeight: 600 }}>
             Try the concierge
           </Link>
@@ -248,7 +248,7 @@ export default function HomePage() {
               </span>
               <h3 className="m-0 mb-2 text-lg font-bold text-sk-navy">We find the perfect match</h3>
               <p className="m-0 text-[15px] leading-relaxed text-sk-text-muted flex-1">
-                Our AI concierge recommends the best chefs and trucks for your event.
+                Our concierge recommends the best chefs and trucks for your event.
               </p>
             </article>
             <article className="flex flex-col rounded-sk-lg border border-sk-card-border bg-white p-6 sm:p-7 h-full">
@@ -320,7 +320,7 @@ export default function HomePage() {
             className="mt-2 inline-flex min-h-[44px] items-center rounded-sk-md bg-sk-gold px-[22px] py-3 text-sm font-bold text-sk-navy no-underline"
             style={{ fontFamily: fontBarlow }}
           >
-            Plan with the concierge
+            Plan with our concierge
             <span aria-hidden className="ml-2">
               →
             </span>

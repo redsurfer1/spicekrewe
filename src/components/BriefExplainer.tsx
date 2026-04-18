@@ -25,7 +25,7 @@ export default function BriefExplainer({ className = '' }: Props) {
             3 Minutes to a Professional Brief
           </h2>
           <p className="mt-1.5 text-[13px] leading-relaxed text-sk-text-muted sm:text-sm">
-            How our AI Matchmaker uses your data to find the perfect professional.
+            How we use your data to match you with the perfect professional.
           </p>
         </div>
       </div>
