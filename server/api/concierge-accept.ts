@@ -132,7 +132,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse): 
     if (buyerEmail) {
       await sendConciergeEmail({
         to: buyerEmail,
-        subject: 'Your SpiceKrewe event package is confirmed',
+        subject: 'Your Spice Krewe event package is confirmed',
         html: `<p>Your concierge package for <strong>${escapeHtml(brief.city_slug)}</strong> is confirmed.</p><p>We will follow up with booking details for each provider.</p>`,
         dedup: {
           entityType: 'concierge_brief',
@@ -154,7 +154,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse): 
         if (!providerEmail) continue;
         const ok = await sendConciergeEmail({
           to: providerEmail,
-          subject: 'New SpiceKrewe concierge booking request',
+          subject: 'New Spice Krewe concierge booking request',
           html: `<p>You have a new concierge-sourced request tied to brief <code>${escapeHtml(briefId)}</code>.</p>`,
           dedup: {
             entityType: 'concierge_brief',

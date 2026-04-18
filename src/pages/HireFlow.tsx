@@ -269,7 +269,7 @@ export default function HireFlow() {
 
   return (
     <div className="min-h-screen flex flex-col" style={{ background: 'var(--sk-body-bg)' }}>
-      <SEO title="Tell us about your event – SpiceKrewe" path="/hire" />
+      <SEO title="Tell us about your event – Spice Krewe" path="/hire" />
       <Navbar />
 
       <main style={{ flex: 1, padding: '24px 16px 48px', width: '100%', boxSizing: 'border-box' }}>
@@ -414,7 +414,7 @@ export default function HireFlow() {
                   Event request received
                 </h1>
                 <p style={{ margin: 0, fontSize: 15, color: 'var(--sk-text-subtle)', lineHeight: 1.65 }}>
-                  Our concierge is matching you with verified chefs and trucks. The SpiceKrewe team will follow up
+                  Our concierge is matching you with verified chefs and trucks. The Spice Krewe team will follow up
                   shortly.
                 </p>
               </div>

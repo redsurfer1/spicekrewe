@@ -8,7 +8,7 @@ import { NASHVILLE_VOICE_SEARCH_FAQ_ITEMS } from '../../lib/seo/nashvilleVoiceFa
 
 const TITLE = 'Vetted chefs & food trucks in Nashville, TN | Spice Krewe';
 const DESCRIPTION =
-  'Book a private chef or food truck in Nashville, TN. SpiceKrewe connects you with verified culinary professionals for private events, corporate gatherings, and celebrations.';
+  'Book a private chef or food truck in Nashville, TN. Spice Krewe connects you with verified culinary professionals for private events, corporate gatherings, and celebrations.';
 const PATH = '/hire/nashville';
 
 const marcusResult = getTalentById('marcus-johnson', TALENT_FALLBACK);

@@ -167,7 +167,7 @@ export default function Footer() {
           style={{ borderTop: '1px solid rgba(255,255,255,0.1)' }}
         >
           <p className="text-sm text-center sm:text-left" style={{ color: 'rgba(255,255,255,0.55)' }}>
-            © {year} SpiceKrewe. All rights reserved.
+            © {year} Spice Krewe. All rights reserved.
           </p>
           <div className="flex flex-wrap justify-center gap-6 text-sm" style={{ color: 'rgba(255,255,255,0.55)' }}>
             <Link to="/data-request" className="hover:text-white transition-colors">

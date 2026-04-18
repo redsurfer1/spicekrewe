@@ -201,7 +201,7 @@ export async function generateConciergePackage(brief: ConciergeBriefInput): Prom
     process.env.ANTHROPIC_MODEL?.trim() ??
     'claude-sonnet-4-20250514';
 
-  const prompt = `You are an event planning concierge for SpiceKrewe in ${brief.cityDisplayName}.
+  const prompt = `You are an event planning concierge for Spice Krewe in ${brief.cityDisplayName}.
 
 Buyer event brief:
 - Event type: ${brief.eventType}
@@ -308,7 +308,7 @@ Rules:
   const packageNarrative =
     typeof parsed.packageNarrative === 'string'
       ? parsed.packageNarrative
-      : 'Your SpiceKrewe concierge package is ready.';
+      : 'Your Spice Krewe concierge package is ready.';
 
   const requiresHumanReview = estimatedTotalCents > HUMAN_REVIEW_TOTAL_CENTS;
 

@@ -147,7 +147,7 @@ export default function TalentCard({ professional: p, appendTalentIdQuery = fals
               <span
                 className="inline-flex max-w-full flex-wrap items-center gap-1.5 rounded-sk-pill px-2 py-0.5 text-[10px] font-bold uppercase tracking-wide text-white"
                 style={{ background: primaryPurple, fontFamily: fontBarlow }}
-                title={`SpiceKrewe Verified · ${tierLabel}`}
+                title={`Spice Krewe Verified · ${tierLabel}`}
               >
                 <span className="inline-flex h-4 w-4 shrink-0 items-center justify-center rounded-full bg-white/20">
                   <Check className="h-2.5 w-2.5 text-white" strokeWidth={3} aria-hidden />

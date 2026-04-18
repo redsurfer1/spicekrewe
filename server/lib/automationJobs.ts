@@ -71,7 +71,7 @@ export async function sendEventReminders(): Promise<void> {
         if (!(await wasEmailAlreadySent(dedup))) {
           await sendConciergeEmail({
             to: buyerEmail,
-            subject: 'Reminder: your SpiceKrewe event is tomorrow',
+            subject: 'Reminder: your Spice Krewe event is tomorrow',
             html: `<p>Your booking <strong>${escapeHtml(id)}</strong> is scheduled for <strong>${escapeHtml(String((booking as { event_date?: string }).event_date ?? ''))}</strong>.</p>`,
             dedup,
           });
@@ -83,7 +83,7 @@ export async function sendEventReminders(): Promise<void> {
         if (!(await wasEmailAlreadySent(dedup))) {
           await sendConciergeEmail({
             to: providerEmail,
-            subject: 'Reminder: SpiceKrewe booking tomorrow',
+            subject: 'Reminder: Spice Krewe booking tomorrow',
             html: `<p>You have a confirmed booking <strong>${escapeHtml(id)}</strong> tomorrow.</p>`,
             dedup,
           });
@@ -113,8 +113,8 @@ export async function sendProviderFinalNudge(): Promise<void> {
       if (await wasEmailAlreadySent(dedup)) continue;
       await sendConciergeEmail({
         to: providerEmail,
-        subject: 'Today is your SpiceKrewe event — quick recap',
-        html: `<p>Booking <strong>${escapeHtml(id)}</strong> is today. Thank you for serving on SpiceKrewe.</p>`,
+        subject: 'Today is your Spice Krewe event — quick recap',
+        html: `<p>Booking <strong>${escapeHtml(id)}</strong> is today. Thank you for serving on Spice Krewe.</p>`,
         dedup,
       });
     }
@@ -173,7 +173,7 @@ export async function sendPostEventReviewRequests(): Promise<void> {
 
       await sendConciergeEmail({
         to: buyerEmail,
-        subject: 'How did your SpiceKrewe event go?',
+        subject: 'How did your Spice Krewe event go?',
         html: bodyHtml,
         dedup,
       });
@@ -318,8 +318,8 @@ export async function recoverAbandonedConciergeBriefs(): Promise<void> {
 
       await sendConciergeEmail({
         to: buyerEmail,
-        subject: 'Your SpiceKrewe concierge package is still available',
-        html: `<p>We put together options for your event. Open SpiceKrewe to review and accept when you are ready.</p>`,
+        subject: 'Your Spice Krewe concierge package is still available',
+        html: `<p>We put together options for your event. Open Spice Krewe to review and accept when you are ready.</p>`,
         dedup,
         metadata: { event_type: (brief as { event_type?: string }).event_type },
       });
@@ -357,7 +357,7 @@ export async function alertHumanReviewBacklog(): Promise<void> {
 
     await sendConciergeEmail({
       to: opsEmail,
-      subject: `SpiceKrewe: ${briefs.length} concierge brief(s) need human review`,
+      subject: `Spice Krewe: ${briefs.length} concierge brief(s) need human review`,
       html: `<p>High-value / review-required backlog:</p><ul>${lines}</ul>`,
       dedup,
       metadata: { count: briefs.length },
@@ -601,7 +601,7 @@ export async function sendDailyOperatorDigest(): Promise<void> {
 
     await sendConciergeEmail({
       to: opsEmail,
-      subject: `SpiceKrewe daily digest — $${digest.revenueDollars} fees (new bookings last 24h)`,
+      subject: `Spice Krewe daily digest — $${digest.revenueDollars} fees (new bookings last 24h)`,
       html: `<pre>${escapeHtml(JSON.stringify(digest, null, 2))}</pre>`,
       dedup,
       metadata: digest,
@@ -693,7 +693,7 @@ export async function sendCityPipelineReport(): Promise<void> {
 
     await sendConciergeEmail({
       to: opsEmail,
-      subject: 'SpiceKrewe weekly city pipeline',
+      subject: 'Spice Krewe weekly city pipeline',
       html: `<pre>${escapeHtml(JSON.stringify(cityReports, null, 2))}</pre>`,
       dedup,
       metadata: { cities: cityReports },

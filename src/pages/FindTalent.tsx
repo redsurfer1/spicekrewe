@@ -275,11 +275,11 @@ export default function FindTalent() {
   return (
     <div className="flex min-h-screen flex-col bg-sk-body-bg">
       <SEO
-        title={`${pageHeading} | SpiceKrewe`}
-        description="Book verified private chefs and food trucks in Memphis with SpiceKrewe. AI concierge, secure payment."
+        title={`${pageHeading} | Spice Krewe`}
+        description="Book verified private chefs and food trucks in Memphis with Spice Krewe. AI concierge, secure payment."
         path="/talent"
-        ogTitle={`${pageHeading} | SpiceKrewe`}
-        ogDescription="Book verified private chefs and food trucks in Memphis with SpiceKrewe. AI concierge, secure payment."
+        ogTitle={`${pageHeading} | Spice Krewe`}
+        ogDescription="Book verified private chefs and food trucks in Memphis with Spice Krewe. AI concierge, secure payment."
       />
       <Navbar />
 

@@ -11,7 +11,7 @@ export default function ConciergePage() {
   return (
     <>
       <SEO
-        title={`Plan an event in ${cityDisplayName} — SpiceKrewe`}
+        title={`Plan an event in ${cityDisplayName} — Spice Krewe`}
         description="Tell us about your event — our free AI concierge helps you choose a private chef, food truck, or both."
       />
       {loading ? (
@@ -19,7 +19,7 @@ export default function ConciergePage() {
       ) : !buyerId ? (
         <div style={{ padding: 16, background: '#fff7ed', color: '#9a3412', maxWidth: 560 }}>
           <p style={{ margin: '0 0 8px' }}>
-            Sign in so we can attach your concierge brief to your SpiceKrewe buyer profile.
+            Sign in so we can attach your concierge brief to your Spice Krewe buyer profile.
           </p>
           <Link to="/login" style={{ fontWeight: 700, color: '#4d2f91' }}>
             Sign in or create an account

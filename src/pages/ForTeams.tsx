@@ -10,10 +10,10 @@ export default function ForTeams() {
   return (
     <div className="min-h-screen flex flex-col" style={{ background: 'var(--sk-body-bg)' }}>
       <SEO
-        title="Corporate events | SpiceKrewe"
+        title="Corporate events | Spice Krewe"
         description="Book private chefs and food trucks for corporate events in Memphis — team lunches, appreciation events, and holiday parties."
         path="/for-teams"
-        ogTitle="Corporate events | SpiceKrewe"
+        ogTitle="Corporate events | Spice Krewe"
         ogDescription="Book private chefs and food trucks for corporate events in Memphis."
       />
       <Navbar />
@@ -59,7 +59,7 @@ export default function ForTeams() {
               maxWidth: 640,
             }}
           >
-            SpiceKrewe makes it easy to book private chefs and food trucks for corporate events in Memphis. Quarterly
+            Spice Krewe makes it easy to book private chefs and food trucks for corporate events in Memphis. Quarterly
             team lunches, appreciation events, holiday parties — we handle the food.
           </p>
           <Link
@@ -74,7 +74,7 @@ export default function ForTeams() {
 
       <section className="mx-auto max-w-[900px] px-4 py-14 sm:px-6">
         <h2 className="m-0 mb-6 text-center text-2xl font-bold text-sk-navy" style={{ fontFamily: fontBarlow }}>
-          Why teams use SpiceKrewe
+          Why teams use Spice Krewe
         </h2>
         <ul className="m-0 list-none space-y-4 p-0 text-[15px] leading-relaxed text-sk-text-muted">
           <li>✓ Verified chefs and food trucks</li>

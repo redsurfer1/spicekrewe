@@ -3,9 +3,9 @@ import Navbar from '../../components/Navigation';
 import Footer from '../../components/Footer';
 import SEO from '../../components/SEO';
 
-const PAGE_TITLE = 'How much does a private chef or food truck cost in Memphis? | SpiceKrewe';
+const PAGE_TITLE = 'How much does a private chef or food truck cost in Memphis? | Spice Krewe';
 const PAGE_DESCRIPTION =
-  'Typical private chef and food truck pricing in Memphis, plus how SpiceKrewe’s 5% booking fee works.';
+  'Typical private chef and food truck pricing in Memphis, plus how Spice Krewe\u2019s 5% booking fee works.';
 
 const fontBarlow = '"Barlow Condensed", system-ui, sans-serif';
 const primary = '#4d2f91';
@@ -73,7 +73,7 @@ export default function PricingGuide2025Page() {
 
           <section className="mb-10 rounded-sk-md border border-sk-gold/30 bg-sk-gold-light/40 p-5">
             <h2 className="m-0 mb-3 text-xl font-bold text-sk-navy" style={{ fontFamily: fontBarlow }}>
-              SpiceKrewe&apos;s fee
+              Spice Krewe&apos;s fee
             </h2>
             <p className="m-0 text-sk-text-muted leading-relaxed">
               We charge <strong className="text-sk-navy">5%</strong> of the booking total. You pay the provider&apos;s

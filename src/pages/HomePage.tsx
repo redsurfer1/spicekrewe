@@ -23,10 +23,10 @@ export default function HomePage() {
   return (
     <div className="min-h-screen bg-sk-body-bg">
       <SEO
-        title="SpiceKrewe — Book a Private Chef or Food Truck in Memphis"
-        description="SpiceKrewe connects Memphis with the city's best private chefs and food trucks. Book for your next event — AI concierge, verified providers, secure payment."
-        ogTitle="SpiceKrewe — Book a Private Chef or Food Truck in Memphis"
-        ogDescription="SpiceKrewe connects Memphis with the city's best private chefs and food trucks. Book for your next event — AI concierge, verified providers, secure payment."
+        title="Spice Krewe — Book a Private Chef or Food Truck in Memphis"
+        description="Spice Krewe connects Memphis with the city's best private chefs and food trucks. Book for your next event — AI concierge, verified providers, secure payment."
+        ogTitle="Spice Krewe — Book a Private Chef or Food Truck in Memphis"
+        ogDescription="Spice Krewe connects Memphis with the city's best private chefs and food trucks. Book for your next event — AI concierge, verified providers, secure payment."
       />
       <Navbar />
       <section style={{ background: '#1a1a2e', padding: '60px 32px 48px', textAlign: 'center' }}>
@@ -71,7 +71,7 @@ export default function HomePage() {
             lineHeight: 1.7,
           }}
         >
-          SpiceKrewe connects Memphis with the city&apos;s best private chefs and food trucks. Tell us about your
+          Spice Krewe connects Memphis with the city&apos;s best private chefs and food trucks. Tell us about your
           event — we&apos;ll handle the rest.
         </p>
         <div
@@ -261,7 +261,7 @@ export default function HomePage() {
               </span>
               <h3 className="m-0 mb-2 text-lg font-bold text-sk-navy">Book with confidence</h3>
               <p className="m-0 text-[15px] leading-relaxed text-sk-text-muted flex-1">
-                Every provider is SpiceKrewe verified. Secure payment. Satisfaction guaranteed.
+                Every provider is Spice Krewe verified. Secure payment. Satisfaction guaranteed.
               </p>
             </article>
           </div>

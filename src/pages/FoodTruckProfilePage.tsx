@@ -118,7 +118,7 @@ export default function FoodTruckProfilePage() {
                   fontWeight: 700,
                 }}
               >
-                SpiceKrewe Verified — {getCulinaryBadgeLabel(tier.tier)} tier
+                Spice Krewe Verified — {getCulinaryBadgeLabel(tier.tier)} tier
               </p>
             )}
 

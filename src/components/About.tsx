@@ -35,11 +35,11 @@ export default function About() {
 
   const defaultContent = {
     story:
-      'SpiceKrewe was built in Memphis to solve a simple problem: booking a private chef or food truck for an event was harder than it needed to be.',
+      'Spice Krewe was built in Memphis to solve a simple problem: booking a private chef or food truck for an event was harder than it needed to be.',
     vision:
       'Phone calls, unanswered emails, and guesswork about pricing. We built a better way — a verified network, a free AI concierge, and secure payment so hosts can focus on the guest list — not the chase.',
     pillars: {
-      hire: `Today SpiceKrewe connects ${cityDisplayName} with its best culinary professionals — vetted, verified, and ready to make your next event unforgettable.`,
+      hire: `Today Spice Krewe connects ${cityDisplayName} with its best culinary professionals — vetted, verified, and ready to make your next event unforgettable.`,
       learn: 'Real chefs. Real trucks. Beautifully simple booking — from intimate dinners to corporate lots and outdoor gatherings.',
       evolve:
         'We obsess over trust: clear expectations, transparent pricing context, and providers who show up prepared — because your event deserves more than a vague “we’ll figure it out.”',
@@ -53,7 +53,7 @@ export default function About() {
     <section id="about" className="py-20 bg-gray-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
-          <h2 className="text-4xl sm:text-5xl font-bold text-spice-purple mb-4">About SpiceKrewe</h2>
+          <h2 className="text-4xl sm:text-5xl font-bold text-spice-purple mb-4">About Spice Krewe</h2>
         </div>
 
         {loading ? (
@@ -82,7 +82,7 @@ export default function About() {
                 <div className="relative bg-white p-8 border border-sk-card-border rounded-sk-md shadow-2xl">
                   <img
                     src="/assets/brand/logo-primary.png"
-                    alt="SpiceKrewe"
+                    alt="Spice Krewe"
                     className="w-full h-auto max-w-md mx-auto"
                     loading="lazy"
                     decoding="async"

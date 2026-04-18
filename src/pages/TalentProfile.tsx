@@ -53,8 +53,8 @@ export default function TalentProfile() {
   const bookLabel = row ? `Book ${firstNameFromFullName(row.name)}` : 'Plan an event';
 
   const metaDescription = row
-    ? `${row.name} — ${row.specialty}. Book verified private events in ${cityDisplayName} on SpiceKrewe.`
-    : 'Browse verified private chefs and food trucks on SpiceKrewe.';
+    ? `${row.name} — ${row.specialty}. Book verified private events in ${cityDisplayName} on Spice Krewe.`
+    : 'Browse verified private chefs and food trucks on Spice Krewe.';
 
   const showRate = Boolean(row?.rate?.trim());
   const showRating = row != null && row.rating > 0;
@@ -68,7 +68,7 @@ export default function TalentProfile() {
   return (
     <div className="min-h-screen bg-white flex flex-col">
       <SEO
-        title={`${displayName} – SpiceKrewe`}
+        title={`${displayName} – Spice Krewe`}
         path={id ? `/talent/${id}` : '/talent'}
         description={metaDescription}
         ogDescription={metaDescription}
@@ -184,7 +184,7 @@ export default function TalentProfile() {
                     fontFamily: fontBarlow,
                   }}
                 >
-                  ✓ SpiceKrewe Verified
+                  ✓ Spice Krewe Verified
                 </span>
                 {tierLabel ? (
                   <span style={{ fontSize: 12, fontWeight: 600, color: 'var(--sk-navy)' }}>OBV: {tierLabel}</span>

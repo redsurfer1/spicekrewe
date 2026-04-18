@@ -27,7 +27,7 @@ export default function Events() {
           </h2>
           <div className="w-24 h-1 bg-gradient-to-r from-spice-purple to-spice-blue mx-auto mb-6" />
           <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-            Popular times to reserve Memphis private chefs and food trucks — plan ahead with SpiceKrewe.
+            Popular times to reserve Memphis private chefs and food trucks — plan ahead with Spice Krewe.
           </p>
         </div>
 

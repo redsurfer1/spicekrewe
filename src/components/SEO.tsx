@@ -1,9 +1,9 @@
 import { Helmet } from 'react-helmet-async';
 
 /** Use explicit `title` per page, e.g. `SpiceKrewe — How it works | Memphis Private Chefs & Food Trucks`. */
-const DEFAULT_TITLE = 'SpiceKrewe | Memphis Private Chefs & Food Trucks';
+const DEFAULT_TITLE = 'Spice Krewe | Memphis Private Chefs & Food Trucks';
 const DEFAULT_DESCRIPTION =
-  'Book a private chef or food truck in Memphis with SpiceKrewe. AI concierge, verified providers, secure payment.';
+  'Book a private chef or food truck in Memphis with Spice Krewe. AI concierge, verified providers, secure payment.';
 export const DEFAULT_OG_IMAGE = 'https://spicekrewe.com/og-image.png';
 const DEFAULT_IMAGE = DEFAULT_OG_IMAGE;
 /** Production origin — no trailing slash (homepage canonical is this exact string). */

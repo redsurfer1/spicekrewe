@@ -89,7 +89,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse): 
     if (providerEmail.includes('@')) {
       await sendConciergeEmail({
         to: providerEmail,
-        subject: 'Your SpiceKrewe payout is on its way',
+        subject: 'Your Spice Krewe payout is on its way',
         html: `<p>Hi ${displayName},</p><p>Your payment of <strong>$${dollars}</strong> has been released. Stripe payouts typically arrive in 2–3 business days.</p>`,
         dedup: {
           entityType: 'stripe_transfer',

@@ -64,7 +64,7 @@ export function buildCredentialJson(payload: CredentialPayload, secret: string) 
     displayName: payload.displayName,
     tier,
     tierLabel: culinary,
-    badgeTitle: `${culinary} — SpiceKrewe Verified`,
+    badgeTitle: `${culinary} — Spice Krewe Verified`,
     hash: hashUserId(payload.userId, secret),
     score: payload.obvScore,
     engagement: payload.engagementCount,
@@ -73,7 +73,7 @@ export function buildCredentialJson(payload: CredentialPayload, secret: string) 
 
 export function buildCredentialBadgeSvg(payload: CredentialPayload, secret: string): string {
   const data = buildCredentialJson(payload, secret);
-  const title = 'SpiceKrewe Verified';
+  const title = 'Spice Krewe Verified';
   const subtitle = data.badgeTitle;
   return `<?xml version="1.0" encoding="UTF-8"?>
 <svg xmlns="http://www.w3.org/2000/svg" width="360" height="120" viewBox="0 0 360 120" role="img" aria-label="${title}">

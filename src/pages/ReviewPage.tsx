@@ -70,7 +70,7 @@ export default function ReviewPage() {
 
   return (
     <div className="min-h-screen bg-sk-body-bg flex flex-col">
-      <SEO title="Leave a review | SpiceKrewe" path="/review" />
+      <SEO title="Leave a review | Spice Krewe" path="/review" />
       <Navbar />
       <main className="mx-auto w-full max-w-lg flex-1 px-4 py-10 sm:px-6">
         {!validParams ? (
@@ -91,7 +91,7 @@ export default function ReviewPage() {
               Thank you for your review!
             </h1>
             <p className="mx-auto mt-4 max-w-md text-[15px] leading-relaxed text-sk-text-muted">
-              Your feedback helps the SpiceKrewe community find the best chefs and food trucks in Memphis.
+              Your feedback helps the Spice Krewe community find the best chefs and food trucks in Memphis.
             </p>
             <Link
               to="/"

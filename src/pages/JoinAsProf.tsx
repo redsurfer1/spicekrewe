@@ -88,7 +88,7 @@ export default function JoinAsProf() {
   return (
     <div className="min-h-screen bg-sk-body-bg flex flex-col">
       <SEO
-        title="List your services on SpiceKrewe"
+        title="List your services on Spice Krewe"
         description="Join Memphis's trusted booking platform for private chefs and food trucks."
         path="/join"
       />
@@ -96,7 +96,7 @@ export default function JoinAsProf() {
       <main className="mx-auto w-full max-w-2xl flex-1 px-4 py-10 sm:px-6">
         <header className="mb-8 text-center">
           <h1 className="m-0 text-3xl font-extrabold text-sk-navy sm:text-4xl" style={{ fontFamily: fontBarlow }}>
-            List your services on SpiceKrewe
+            List your services on Spice Krewe
           </h1>
           <p className="mx-auto mt-3 max-w-xl text-[15px] leading-relaxed text-sk-text-muted">
             Memphis&apos;s trusted booking platform for private chefs and food trucks. Set your own rates. Keep 95% of
@@ -115,7 +115,7 @@ export default function JoinAsProf() {
             style={{ fontFamily: fontBarlow }}
           >
             <h2 className="m-0 text-2xl font-bold" style={{ color: primary }}>
-              Welcome to SpiceKrewe!
+              Welcome to Spice Krewe!
             </h2>
             <p className="mx-auto mt-4 max-w-md text-[15px] leading-relaxed text-sk-text-muted">
               Check your email to confirm your account. We will be in touch within 24 hours to complete your profile and
@@ -313,7 +313,7 @@ export default function JoinAsProf() {
               className="w-full min-h-[48px] rounded-sk-md text-base font-bold text-white shadow-md"
               style={{ background: primary, opacity: submitting ? 0.75 : 1 }}
             >
-              {submitting ? 'Submitting…' : 'Join SpiceKrewe'}
+              {submitting ? 'Submitting…' : 'Join Spice Krewe'}
             </button>
           </form>
         )}

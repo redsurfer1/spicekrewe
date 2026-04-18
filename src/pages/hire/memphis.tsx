@@ -16,7 +16,7 @@ export default function MemphisHirePage() {
   const { cityDisplayName, cityStateCode } = useCity();
 
   const title = `Vetted private chefs & food trucks in ${cityDisplayName}, ${cityStateCode} | Spice Krewe`;
-  const description = `Book a private chef or food truck in ${cityDisplayName}, ${cityStateCode}. SpiceKrewe connects you with verified culinary professionals for private events, corporate gatherings, and celebrations.`;
+  const description = `Book a private chef or food truck in ${cityDisplayName}, ${cityStateCode}. Spice Krewe connects you with verified culinary professionals for private events, corporate gatherings, and celebrations.`;
 
   const faq = buildCityVoiceFaqItems(cityDisplayName);
   const structuredData = buildCityHirePageStructuredData(
@@ -25,7 +25,7 @@ export default function MemphisHirePage() {
       regionCode: cityStateCode,
       country: 'US',
       hirePath: PATH,
-      description: `SpiceKrewe — private chef and food truck booking platform in ${cityDisplayName}. AI-powered concierge. Verified providers.`,
+      description: `Spice Krewe — private chef and food truck booking platform in ${cityDisplayName}. AI-powered concierge. Verified providers.`,
       providerTypes: memphisProviderMix(),
       mapUrl: `https://www.google.com/maps/place/${encodeURIComponent(`${cityDisplayName}, ${cityStateCode}`)}`,
     },

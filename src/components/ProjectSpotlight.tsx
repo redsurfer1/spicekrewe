@@ -35,7 +35,7 @@ export default function ProjectSpotlight() {
                   <dt className="mb-1 text-[11px] font-semibold uppercase tracking-wider text-sk-gold">The outcome</dt>
                   <dd className="m-0 text-white/88">
                     Guests enjoyed a curated menu, on-time service, and a stress-free host experience — booked through
-                    SpiceKrewe verified chefs.
+                    Spice Krewe verified chefs.
                   </dd>
                 </div>
               </dl>
